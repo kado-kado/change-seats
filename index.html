@@ -11,14 +11,20 @@
 
     <body>
         <main>
-            <section id="settings">
-                <p>Settings</p>
-            </section>
-            <section>
-                <div class="">
-                    <p>test</p>
-                </div>
-            </section>
+            <nav id="sidebar">
+                <h3>Settings</h3>
+            </nav>
+
+            <main id="main">
+                <section id="defaultContent">
+                    <h1>メイン画面（通常）</h1>
+                    <p>ここに通常のコンテンツが表示されます。</p>
+                </section>
+                <section id="switchedContent" style="display: none;">
+                    <h1>新しいコンテンツ！</h1>
+                    <p>サイドバーを押したら、こちらが表示されます。</p>
+                </section>
+            </main>
         </main>
     </body>
 </html>

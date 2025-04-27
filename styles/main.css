@@ -1,0 +1,33 @@
+body {
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  #sidebar {
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  #main {
+    flex: 1;
+    background-color: #f0f0f0;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+  button {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: #555;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #777;
+  }
