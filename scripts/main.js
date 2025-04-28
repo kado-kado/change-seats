@@ -1,0 +1,3 @@
+function openSettings(){
+    alert('test');
+}
