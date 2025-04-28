@@ -14,7 +14,23 @@ body {
     box-sizing: border-box;
 }
 
-#mainScreen #settingsScreen {
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.menu-list li {
+    margin-bottom: 20px;
+}
+
+.menu-list a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+#main {
     flex: 1;
     background-color: #f0f0f0;
     padding: 1rem;
@@ -22,6 +38,10 @@ body {
     overflow-y: auto;
 }
 
-a {
-    color: #fff;
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
 }
