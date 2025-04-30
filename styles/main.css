@@ -36,6 +36,10 @@ body {
     padding: 1rem;
     box-sizing: border-box;
     overflow-y: auto;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .content-section {
