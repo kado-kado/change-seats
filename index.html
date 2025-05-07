@@ -24,8 +24,7 @@
                 <div id="Board">
                     <p>黒板</p>
                 </div>
-                <div id="sheets">
-                </div>
+                <div id="sheets"></div>
             </section>
             <section id="Settings" class="content-section">
                 <h1>Settings</h1>
@@ -44,10 +43,77 @@
                 <label for="eyesight">前の席(任意):</label>
                 <input type="text" id="eyesight" name="eyesight" />
                 <br>
+                <label for="girlsSeats">女子席リスト(任意): </label>
+                <input type="text" id="girlsSeats" name="girlsSeats" />
+                <br>
                 <label for="userJson">JSONファイルを選択:</label>
                 <input type="file" id="userJson" name="userJson" accept="application/json" />
                 <br>
                 <button id="applyBtn">Apply</button>
+                <br>
+                <button onclick="exportSeatsToCSV(currentSeats2D)">CSV出力</button>
+            </section>
+            <section id="README" class="content-section">
+                <h1>change-seats</h1>
+                <p>学校などで使用できる、<strong>視力・性別・席希望</strong>を考慮した席替えシステムです。CSV出力にも対応しています。</p>
+
+                <h2>主な機能</h2>
+                <ul>
+                    <li>名前と出席番号を元にランダム席割り</li>
+                    <li>女子専用席の指定</li>
+                    <li>視力の弱い生徒を前方席に配置</li>
+                    <li>CSVエクスポート（Excelで開ける形式）</li>
+                </ul>
+
+                <h2>ファイル構成</h2>
+                <pre>
+                root/
+                ├── index.html(READMEが含まれている。)
+                ├── main.js
+                ├── package.json
+                ├── styles/main.css
+                ├── scripts/main.js
+                └── README.md
+                </pre>
+
+                <h2>使用方法</h2>
+                <ol>
+                    <li><strong>change-seats.exe</strong>を開く</li>
+                    <li>生徒の名前・出席番号を入力（JSONやフォーム）</li>
+                    <li>「女子席」や「前の席希望」などのオプションを指定</li>
+                    <li>席割りを生成</li>
+                    <li>必要に応じて「CSV出力」ボタンをクリック</li>
+                    <p>※1 任意のタグがある場所は入力しなくても動きます。</p>
+                    <p>※2 女子席の指定により、班分けをスムーズにしています。</p>
+                </ol>
+
+                <h2>入力仕様（JSON想定）</h2>
+                <pre>
+                [
+                    { "name": "田中", "number": 1, "gender": "male" },
+                    { "name": "鈴木", "number": 2, "gender": "female" }
+                ]
+                </pre>
+                <p>性別や希望（女子席・前の席希望）はHTMLフォームで指定できます。</p>
+
+                <h2>CSV出力形式</h2>
+                <ul>
+                    <li>出力ファイル名： <strong>seats.csv</strong></li>
+                    <li>文字コード： <strong>UTF-8</strong></li>
+                    <li>フォーマット： 出席番号,名前</li>
+                </ul>
+
+                <h2>使用技術</h2>
+                <ul>
+                    <li>HTML, CSS, JavaScript</li>
+                    <li>ブラウザベース</li>
+                    <li>CSV出力機能（Blob API）</li>
+                    <li>Node.js</li>
+                    <li>Electron ^29.4.6</li>
+                </ul>
+
+                <h2>ライセンス</h2>
+                <p>MIT</p>
             </section>
             <section id="Credit" class="content-section">
                 <h3>Made by kado</h3>

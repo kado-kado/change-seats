@@ -8,6 +8,8 @@ window.onload = function () {
         const deleteLeft = parseInt(document.getElementById('deleteLeft').value) || 0;
         const eyesightText = document.getElementById('eyesight').value.trim();
         const eyesightList = eyesightText ? eyesightText.split(',').map(x => x.trim()) : [];
+        const girlSeatsText = document.getElementById('girlsSeats').value.trim();
+        const girlSeatIndexes = girlSeatsText ? girlSeatsText.split(',').map(x => parseInt(x.trim())) : null;
 
         const fileInput = document.getElementById('userJson');
         const file = fileInput.files[0];
@@ -24,51 +26,72 @@ window.onload = function () {
                 const totalSeats = vertical * horizontal;
                 const adjustedSeats = totalSeats - deleteLeft - deleteRight;
 
-                if (students.length > adjustedSeats) {
-                    alert(`席数（${adjustedSeats}）より生徒数（${students.length}）が多いです。`);
-                    return;
-                }
-
-                const frontRowSeatCount = horizontal * 2;
+                const girls = students.filter(s => s.gender === 'female');
+                const boys = students.filter(s => s.gender === 'male');
                 const eyesightStudents = students.filter(s => eyesightList.includes(String(s.number)));
                 const others = students.filter(s => !eyesightList.includes(String(s.number)));
 
-                const frontCount = Math.min(eyesightStudents.length, frontRowSeatCount);
-                const remainingFrontSlots = frontRowSeatCount - frontCount;
+                if (girlSeatIndexes && girlSeatIndexes.length !== girls.length) {
+                    alert("女子の人数と指定席数が一致しません。");
+                    return;
+                }
 
-                const extraFrontStudents = shuffleArray(others).slice(0, remainingFrontSlots);
-                const remainingOthers = others.filter(s => !extraFrontStudents.includes(s));
+                const seats = Array(adjustedSeats).fill(null);
+                const shuffledGirls = shuffleArray(girls);
+                const shuffledBoys = shuffleArray(boys);
+                const shuffledOthers = shuffleArray(others);
 
-                const frontStudents = shuffleArray([...eyesightStudents.slice(0, frontCount), ...extraFrontStudents]);
-                const backStudents = shuffleArray(remainingOthers);
+                if (girlSeatIndexes) {
+                    girlSeatIndexes.forEach((idx, i) => {
+                        seats[idx] = shuffledGirls[i];
+                    });
+                }
 
-                const allStudents = [...frontStudents, ...backStudents];
+                const frontIndexes = [];
+                for (let i = 0; i < 2; i++) {
+                    for (let j = 0; j < horizontal; j++) {
+                        const index = i * horizontal + j;
+                        if (i === vertical - 1 && (j < deleteLeft || j >= horizontal - deleteRight)) continue;
+                        if (index < adjustedSeats && !girlSeatIndexes?.includes(index)) {
+                            frontIndexes.push(index);
+                        }
+                    }
+                }
 
-                while (allStudents.length < adjustedSeats) {
-                    allStudents.push({ name: "空席", number: null });
+                const availableFrontIndexes = frontIndexes.filter(idx => seats[idx] === null);
+                const eyesightQueue = shuffleArray(eyesightStudents);
+                for (let i = 0; i < availableFrontIndexes.length && eyesightQueue.length > 0; i++) {
+                    seats[availableFrontIndexes[i]] = eyesightQueue.shift();
+                }
+
+                const remainingStudents = shuffleArray([
+                    ...shuffledBoys,
+                    ...shuffledGirls.slice(girlSeatIndexes ? girls.length : 0),
+                    ...eyesightQueue,
+                    ...shuffledOthers
+                ]);
+                for (let i = 0; i < seats.length; i++) {
+                    if (!seats[i] && remainingStudents.length > 0) {
+                        seats[i] = remainingStudents.shift();
+                    }
+                }
+
+                while (seats.length < adjustedSeats) {
+                    seats.push({ name: "空席", number: null });
                 }
 
                 const seats2D = [];
+                let index = 0;
                 for (let i = 0; i < vertical; i++) {
                     const row = [];
                     for (let j = 0; j < horizontal; j++) {
-                        row.push(null);
+                        if (i === vertical - 1 && (j < deleteLeft || j >= horizontal - deleteRight)) {
+                            row.push(null);
+                        } else {
+                            row.push(seats[index++] || null);
+                        }
                     }
                     seats2D.push(row);
-                }
-
-                let index = 0;
-                for (let i = 0; i < vertical; i++) {
-                    for (let j = 0; j < horizontal; j++) {
-                        if (i === vertical - 1) {
-                            if (j < deleteLeft || j >= horizontal - deleteRight) {
-                                continue;
-                            }
-                        }
-                        if (index < allStudents.length) {
-                            seats2D[i][j] = allStudents[index++];
-                        }
-                    }
                 }
 
                 displaySeats(seats2D);
@@ -94,21 +117,28 @@ function shuffleArray(array) {
 }
 
 function displaySeats(seats) {
+    currentSeats2D = seats;
     let output = '<table border="1" style="border-collapse: collapse;">';
-    for (const row of seats) {
-        output += '<tr>';
-        for (const seat of row) {
-            if (seat === null) {
-                output += '<td style="width: 100px; height: 60px; background: #ccc;"></td>';
+    for (let row of seats) {
+        output += "<tr>";
+        for (let seat of row) {
+            if (!seat || seat.name === "空席") {
+                output += `<td style="width: 100px; height: 60px; background: #ccc;"></td>`;
             } else {
-                output += `<td style="width: 100px; height: 60px; text-align: center; vertical-align: middle;">
-                            ${seat.name} (${seat.number !== null ? seat.number : ''})
-                           </td>`;
+                let bgColor = "#ffffff";
+                if (seat.gender === "male") {
+                    bgColor = "#d0e6ff";
+                } else if (seat.gender === "female") {
+                    bgColor = "#ffe0f0";
+                }
+                output += `<td style="width: 100px; height: 60px; text-align: center; vertical-align: middle; background: ${bgColor};">
+                    ${seat.name} (${seat.number})
+                </td>`;
             }
         }
-        output += '</tr>';
+        output += "</tr>";
     }
-    output += '</table>';
+    output += "</table>";
 
     let container = document.getElementById("seatDisplay");
     if (!container) {
@@ -127,4 +157,33 @@ function showSection(sectionId) {
     if (target) {
         target.classList.add('active');
     }
+}
+
+function exportSeatsToCSV(seats2D) {
+    let csvContent = "";
+
+    for (let i = 0; i < seats2D.length; i++) {
+        const row = seats2D[i].map(seat => {
+            if (seat && seat.name !== "空席") {
+                return `${seat.number},${seat.name}`;
+            } else {
+                return ",";
+            }
+        }).join(",");
+
+        csvContent += row + "\n";
+    }
+
+    const blob = new Blob([new TextEncoder("shift-jis").encode(csvContent)], {type: "text/csv;charset=shift-jis;"});
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'seats.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    alert('Excelでインポートする場合は、UTF-8のため文字化けする恐れがあります。');
 }

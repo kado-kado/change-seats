@@ -1,11 +1,19 @@
 {
-    "name": "seat-changer",
+    "name": "change-seats",
     "version": "1.0.0",
+    "description": "change-seats",
     "main": "main.js",
     "scripts": {
-        "start": "electron ."
+      "start": "electron .",
+      "build": "electron-builder"
+    },
+    "dependencies": {
+      "electron": "^29.4.6"
     },
     "devDependencies": {
-        "electron": "^29.4.6"
-    }
-}
+      "electron-builder": "^24.0.0"
+    },
+    "author": "kado-kado",
+    "license": "MIT"
+  }
+  
