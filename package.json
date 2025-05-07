@@ -4,16 +4,12 @@
     "description": "change-seats",
     "main": "main.js",
     "scripts": {
-      "start": "electron .",
-      "build": "electron-builder"
-    },
-    "dependencies": {
-      "electron": "^29.4.6"
+        "start": "electron .",
+        "build": "electron-builder"
     },
     "devDependencies": {
-      "electron-builder": "^24.0.0"
+        "electron-builder": "^24.13.3"
     },
     "author": "kado-kado",
     "license": "MIT"
-  }
-  
+}
