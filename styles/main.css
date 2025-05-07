@@ -126,3 +126,7 @@ td {
 td[style*="background: #ccc"] {
     background-color: #bdc3c7 !important;
 }
+
+a{
+    color: #000000;
+}
