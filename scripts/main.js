@@ -1,26 +1,13 @@
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.content-section');
-    sections.forEach(section => {
-        section.classList.remove('active');
-    });
-    const target = document.getElementById(sectionId);
-    if (target) {
-        target.classList.add('active');
-    }
-}
-
 window.onload = function () {
     showSection('Main');
-
-    document.getElementById('Settings').appendChild(applyBtn);
 
     document.getElementById('applyBtn').addEventListener('click', () => {
         const vertical = parseInt(document.getElementById('vertical').value);
         const horizontal = parseInt(document.getElementById('horizontal').value);
-        const deleteRight = parseInt(document.getElementById('deleteRight').value) || 0; // 右側の席の削除数
-        const deleteLeft = parseInt(document.getElementById('deleteLeft').value) || 0; // 左側の席の削除数
+        const deleteRight = parseInt(document.getElementById('deleteRight').value) || 0;
+        const deleteLeft = parseInt(document.getElementById('deleteLeft').value) || 0;
         const eyesightText = document.getElementById('eyesight').value.trim();
-        const eyesightList = eyesightText ? eyesightText.split(',').map(name => name.trim()) : [];
+        const eyesightList = eyesightText ? eyesightText.split(',').map(x => x.trim()) : [];
 
         const fileInput = document.getElementById('userJson');
         const file = fileInput.files[0];
@@ -33,54 +20,58 @@ window.onload = function () {
         const reader = new FileReader();
         reader.onload = function (e) {
             try {
-                const students = JSON.parse(e.target.result); // [{name:"田中", number:1}, ...]
-                const seatCount = vertical * horizontal - deleteRight - deleteLeft; // 左右削除した分だけ席数を調整
+                const students = JSON.parse(e.target.result);
+                const totalSeats = vertical * horizontal;
+                const adjustedSeats = totalSeats - deleteLeft - deleteRight;
 
-                if (students.length > seatCount) {
-                    alert(`席数（${seatCount}）より生徒数（${students.length}）が多いです。`);
+                if (students.length > adjustedSeats) {
+                    alert(`席数（${adjustedSeats}）より生徒数（${students.length}）が多いです。`);
                     return;
                 }
 
-                // シャッフル
-                const shuffled = students.slice().sort(() => Math.random() - 0.5);
+                const frontRowSeatCount = horizontal * 2;
+                const eyesightStudents = students.filter(s => eyesightList.includes(String(s.number)));
+                const others = students.filter(s => !eyesightList.includes(String(s.number)));
 
-                // 空席追加
-                while (shuffled.length < seatCount) {
-                    shuffled.push({ name: "空席", number: null });
+                const frontCount = Math.min(eyesightStudents.length, frontRowSeatCount);
+                const remainingFrontSlots = frontRowSeatCount - frontCount;
+
+                const extraFrontStudents = shuffleArray(others).slice(0, remainingFrontSlots);
+                const remainingOthers = others.filter(s => !extraFrontStudents.includes(s));
+
+                const frontStudents = shuffleArray([...eyesightStudents.slice(0, frontCount), ...extraFrontStudents]);
+                const backStudents = shuffleArray(remainingOthers);
+
+                const allStudents = [...frontStudents, ...backStudents];
+
+                while (allStudents.length < adjustedSeats) {
+                    allStudents.push({ name: "空席", number: null });
                 }
 
-                // 前の席にする生徒を配置
-                const frontSeats = students.filter(student => eyesightList.includes(student.number.toString()));
-
-                // 2次元配列を作成
-                const seats = [];
-                let frontIndex = 0;
-                for (let row = 0; row < vertical; row++) {
-                    const start = row * horizontal;
-                    let rowSeats = shuffled.slice(start, start + horizontal);
-
-                    // 最後の行に対して左右の席を削除
-                    if (row === vertical - 1) {
-                        for (let i = 0; i < deleteLeft; i++) {
-                            rowSeats[i] = null; // 左側から削除
-                        }
-                        for (let i = 0; i < deleteRight; i++) {
-                            rowSeats[horizontal - 1 - i] = null; // 右側から削除
-                        }
+                const seats2D = [];
+                for (let i = 0; i < vertical; i++) {
+                    const row = [];
+                    for (let j = 0; j < horizontal; j++) {
+                        row.push(null);
                     }
-
-                    // 前の席に入る生徒を配置
-                    for (let i = 0; i < rowSeats.length; i++) {
-                        if (rowSeats[i] === null && frontIndex < frontSeats.length) {
-                            rowSeats[i] = frontSeats[frontIndex];
-                            frontIndex++;
-                        }
-                    }
-
-                    seats.push(rowSeats);
+                    seats2D.push(row);
                 }
 
-                displaySeats(seats);
+                let index = 0;
+                for (let i = 0; i < vertical; i++) {
+                    for (let j = 0; j < horizontal; j++) {
+                        if (i === vertical - 1) {
+                            if (j < deleteLeft || j >= horizontal - deleteRight) {
+                                continue;
+                            }
+                        }
+                        if (index < allStudents.length) {
+                            seats2D[i][j] = allStudents[index++];
+                        }
+                    }
+                }
+
+                displaySeats(seats2D);
                 showSection('Main');
 
             } catch (err) {
@@ -93,22 +84,31 @@ window.onload = function () {
     });
 };
 
+function shuffleArray(array) {
+    const result = array.slice();
+    for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+    }
+    return result;
+}
+
 function displaySeats(seats) {
     let output = '<table border="1" style="border-collapse: collapse;">';
-    for (let row of seats) {
-        output += "<tr>";
-        for (let seat of row) {
+    for (const row of seats) {
+        output += '<tr>';
+        for (const seat of row) {
             if (seat === null) {
-                output += `<td style="width: 80px; height: 40px; background: #ccc;"></td>`;
+                output += '<td style="width: 100px; height: 60px; background: #ccc;"></td>';
             } else {
-                output += `<td style="width: 80px; height: 40px; text-align: center;">
+                output += `<td style="width: 100px; height: 60px; text-align: center; vertical-align: middle;">
                             ${seat.name} (${seat.number !== null ? seat.number : ''})
-                          </td>`;
+                           </td>`;
             }
         }
-        output += "</tr>";
+        output += '</tr>';
     }
-    output += "</table>";
+    output += '</table>';
 
     let container = document.getElementById("seatDisplay");
     if (!container) {
@@ -117,4 +117,14 @@ function displaySeats(seats) {
         document.getElementById("sheets").appendChild(container);
     }
     container.innerHTML = output;
+}
+
+function showSection(sectionId) {
+    document.querySelectorAll('.content-section').forEach(section => {
+        section.classList.remove('active');
+    });
+    const target = document.getElementById(sectionId);
+    if (target) {
+        target.classList.add('active');
+    }
 }
