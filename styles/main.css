@@ -7,42 +7,6 @@ body {
     background-color: #eaeaea;
 }
 
-#sidebar {
-    width: 200px;
-    height: 100%;
-    background-color: #2c3e50;
-    color: #ecf0f1;
-    padding: 2rem 1rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.menu-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 40px;
-    width: 100%;
-}
-
-.menu-list li {
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.menu-list a {
-    color: #ecf0f1;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.menu-list a:hover {
-    color: #1abc9c;
-}
-
 #main {
     flex: 1;
     background-color: #fdfdfd;
@@ -51,11 +15,8 @@ body {
     overflow-y: auto;
 }
 
-#Main {
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+#sheets {
+    width: 100%;
 }
 
 .content-section {
@@ -64,37 +25,6 @@ body {
 
 .content-section.active {
     display: block;
-}
-
-input[type="number"], input[type="text"], input[type="file"] {
-    padding: 6px 10px;
-    margin: 6px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    max-width: 300px;
-}
-
-label {
-    font-weight: bold;
-    display: block;
-    margin-top: 12px;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    background-color: #3498db;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #2980b9;
 }
 
 #seatDisplay {
@@ -114,7 +44,7 @@ table {
 
 td {
     border: 1px solid #ccc;
-    height: calc(90vw / 10);
+    height: calc(90vw / 15);
     max-height: 60px;
     text-align: center;
     vertical-align: middle;
@@ -129,4 +59,16 @@ td[style*="background: #ccc"] {
 
 a{
     color: #000000;
+}
+.seat {
+    opacity: 0;
+    transform: translateY(20px);
+    visibility: hidden;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.seat.show-seat {
+    opacity: 1;
+    transform: translateY(0);
+    visibility: visible;
 }
