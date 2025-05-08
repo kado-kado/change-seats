@@ -1,38 +1,46 @@
-# change-seats
+# change-seats - Smart Seating Arrangement Tool
 
-A seat arrangement system that considers **vision, gender, and seat preferences** for use in schools and similar environments. It also supports CSV export.
+A browser-based tool to automate seating arrangements with consideration for eyesight, gender, and custom preferences. Runs entirely offline and supports CSV export.
 
 ## Key Features
 
-* Random seat assignment based on names and student numbers
-* Assignment of seats for females only
-* Placement of students with poor vision in the front seats
-* CSV export (in a format that can be opened in Excel)
+* Randomized seating from student data (JSON input)
+* Female seat pre-assignment to avoid isolation
+* Prioritized front-row seating for students with poor eyesight
+* Supports gaps (e.g., left/right seat removal)
+* Export to CSV (Excel-compatible format)
+* Works offline with Electron
 
-## File Structure
+## Installation
+
+### Github
+
+[Can be installed from this page](https://github.com/kado-kado/change-seats/releases)
+
+## Directory Structure
 
 ```
 root/
-├── index.html (Includes README)
+├── index.html
 ├── main.js
 ├── package.json
-├── styles/main.css
-├── scripts/main.js
-└── README.md
+├── styles/
+│   ├── main.css
+│   ├── section-main.css
+│   ├── section-settings.css
+│   └── sidebar.css
+├── scripts/
+│   ├── main.js
+│   ├── animation.js
+│   ├── change-section.js
+│   ├── export.js
+│   └── hint.js
+├── LICENSE
+├── README.md (Japanese)
+└── README-en.md (English)
 ```
 
-## How to Use
-
-1. Open **change-seats.exe**
-2. Enter student names and attendance numbers (via JSON or form)
-3. Specify options such as "female-only seats" or "front seat preference"
-4. Generate the seat arrangement
-5. If necessary, click the "CSV export" button
-
-*Note 1: Fields marked as optional can be skipped.*
-*Note 2: The female-only seat option makes group division smoother.*
-
-## Input Specification (JSON format)
+## JSON Input Format
 
 ```json
 [
@@ -41,21 +49,27 @@ root/
 ]
 ```
 
-Gender and preferences (female-only seats, front seat preference) can be specified via the HTML form.
+## Configuration Options
 
-## CSV Export Format
+| Field             | Description                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| Vertical Seats    | Number of seat rows                                                |
+| Horizontal        | Number of seat columns                                             |
+| Delete Left/Right | Remove seats at both ends of the last row (for uneven layout)      |
+| Eyesight          | List of student numbers who need front-row seats (comma-separated) |
+| Girls Seats       | Indexes (flattened) where female students are pre-assigned         |
 
-* Export File Name: **seats.csv**
-* Encoding: **UTF-8**
-* Format: Attendance number, Name
+## CSV Export
+
+* File name: `seats.csv`
+* Encoding: UTF-8
+* Format: student number, name (empty seat: empty cell)
 
 ## Technologies Used
 
-* HTML, CSS, JavaScript
-* Browser-based
-* CSV export functionality (Blob API)
-* Node.js
-* Electron ^29.4.6
+* HTML/CSS/JavaScript
+* Electron (desktop support)
+* Blob API for CSV download
 
 ## License
 

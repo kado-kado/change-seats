@@ -4,7 +4,10 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>change-seats</title>
+        <link href="styles/sidebar.css" rel="stylesheet" />
+        <link href="styles/section-settings.css" rel="stylesheet" />
         <link href="styles/main.css" rel="stylesheet" />
+        <link href="styles/section-main.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -14,7 +17,7 @@
                 <li><a href="#" onclick="showSection('Main')">Main</a></li>
                 <li><a href="#" onclick="showSection('Settings')">Settings</a></li>
                 <li><a href="#" onclick="showSection('README')">README</a></li>
-                <li><a href="#" onclick="showSection('Credit')">Credit</a></li>
+                <li><a href="#" onclick="showSection('Info')">Info</a></li>
             </ul>
         </nav>
 
@@ -29,32 +32,40 @@
                 <h1>Settings</h1>
                 <label for="vertical">縦の席数:</label>
                 <input type="number" id="vertical" name="vertical" min="1" max="8" />
+                <button class="hint" onclick="alertHint('vertical')">hint</button>
                 <br>
                 <label for="horizontal">横の席数:</label>
                 <input type="number" id="horizontal" name="horizontal" min="1" max="8" />
+                <button class="hint" onclick="alertHint('horizontal')">hint</button>
                 <br>
                 <label for="deleteRight">右から削除する席数(任意):</label>
                 <input type="number" id="deleteRight" name="deleteRight" min="0" max="8" />
+                <button class="hint" onclick="alertHint('deleteRight')">hint</button>
                 <br>
                 <label for="deleteLeft">左から削除する席数(任意):</label>
                 <input type="number" id="deleteLeft" name="deleteLeft" min="0" max="8" />
+                <button class="hint" onclick="alertHint('deleteLeft')">hint</button>
                 <br>
                 <label for="eyesight">前の席(任意):</label>
                 <input type="text" id="eyesight" name="eyesight" />
+                <button class="hint" onclick="alertHint('eyesight')">hint</button>
                 <br>
                 <label for="girlsSeats">女子席リスト(任意): </label>
                 <input type="text" id="girlsSeats" name="girlsSeats" />
+                <button class="hint" onclick="alertHint('girlsSeats')">hint</button>
                 <br>
                 <label for="userJson">JSONファイルを選択:</label>
                 <input type="file" id="userJson" name="userJson" accept="application/json" />
+                <button class="hint" onclick="alertHint('userJson')">hint</button>
                 <br>
                 <button id="applyBtn">Apply</button>
                 <br>
-                <button onclick="exportSeatsToCSV(currentSeats2D)">CSV出力</button>
+                <button id="export" onclick="exportSeatsToCSV(currentSeats2D)">CSV出力</button>
             </section>
             <section id="README" class="content-section">
                 <h1>change-seats</h1>
                 <p>学校などで使用できる、<strong>視力・性別・席希望</strong>を考慮した席替えシステムです。CSV出力にも対応しています。</p>
+                <p>オフラインで動作します。</p>
 
                 <h2>主な機能</h2>
                 <ul>
@@ -67,11 +78,22 @@
                 <h2>ファイル構成</h2>
                 <pre>
                 root/
-                ├── index.html(READMEが含まれている。)
+                ├── index.html
                 ├── main.js
                 ├── package.json
-                ├── styles/main.css
-                ├── scripts/main.js
+                ├── styles/
+                |       ├── main.css
+                |       ├── section-main.css
+                |       ├── section-settings.css
+                |       └── sidebar.css
+                ├── scripts/
+                |       ├── main.js
+                |       ├── animation.js
+                |       ├── change-section.js
+                |       ├── export.js
+                |       └── hint.js
+                ├── LICENSE
+                ├── README-en.md
                 └── README.md
                 </pre>
 
@@ -114,7 +136,7 @@
                 <h2>ライセンス</h2>
                 <p>MIT</p>
             </section>
-            <section id="Credit" class="content-section">
+            <section id="Info" class="content-section">
                 <div id="repo-info"></div>
                 <a href="https://github.com/kado-kado/change-seats" target="_blank" style="display:inline-block; text-decoration:none;">
                     <img 
@@ -123,6 +145,7 @@
                     style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
                     />
                 </a>
+                <p>change-seats ver. 1.1.0</p>
                 <p>
                     © 2025 <a href="https://github.com/kado-kado">kado-kado</a>.
                     Developed with
@@ -136,5 +159,9 @@
             </section>
         </main>
         <script src="scripts/main.js"></script>
+        <script src="scripts/animation.js"></script>
+        <script src="scripts/change-section.js"></script>
+        <script src="scripts/export.js"></script>
+        <script src="scripts/hint.js"></script>
     </body>
 </html>
