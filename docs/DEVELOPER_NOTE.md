@@ -22,9 +22,12 @@ root/
 │   ├── change-section.js
 │   ├── export.js
 │   └── hint.js
+├── docs/
+|    ├── README.md (日本語)
+|    ├── README-en.md (English)
+|    └── DEVELOPER_NOTE.md
 ├── LICENSE
-├── README-en.md
-└── README.md
+└── README.md (root)
 ```
 
 ---
