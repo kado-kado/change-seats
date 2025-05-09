@@ -1,6 +1,7 @@
 # 席替えアプリ 技術者向けノート
 
-このドキュメントは、Webベースの席替えアプリの内部構造と実装技術についてまとめた技術者向けノートです。HTML/CSS/JavaScript によって構成されています。
+このドキュメントは、Webベースの席替えアプリの内部構造と実装技術についてまとめた技術者向けノートです。HTML/CSS/JavaScript/Node.js によって構成されています。
+Electronを使用し、ビルドされています。
 
 ---
 
@@ -62,6 +63,10 @@ root/
 * `Blob + createObjectURL` によりローカルで `seats.csv` をダウンロード。
 * UTF-8 形式、Shift-JISは非採用（※必要時に変換要）。
 
+### `localstorage.js`
+
+* `localstorage` を使用し、入力情報の保存を行う。
+
 ### `hint.js`
 
 * `alertHint(param)` により対象フォームに応じた説明を `alert()`。
@@ -101,3 +106,4 @@ root/
 * **ファイル読み込みは`try-catch`で安全性確保**
 * **アニメーションと表示処理は完全分離（可読性・再利用性向上）**
 * **UTF-8 でエクスポート → 文字化け注意の `alert` 表示あり**
+* **localstorageを使用している**
