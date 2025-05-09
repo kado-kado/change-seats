@@ -60,6 +60,8 @@
                 <br>
                 <button id="applyBtn">Apply</button>
                 <br>
+                <button id="storageClear" onclick="storageClear()">クリア</button>
+                <br>
                 <button id="export" onclick="exportSeatsToCSV(currentSeats2D)">CSV出力</button>
             </section>
             <section id="README" class="content-section">
@@ -145,7 +147,7 @@
                     style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
                     />
                 </a>
-                <p>change-seats ver. 1.2.0</p>
+                <p>change-seats ver. 1.3.0</p>
                 <p>
                     © 2025 <a href="https://github.com/kado-kado">kado-kado</a>.
                     Developed with
@@ -163,5 +165,6 @@
         <script src="scripts/change-section.js"></script>
         <script src="scripts/export.js"></script>
         <script src="scripts/hint.js"></script>
+        <script src="scripts/localstorage.js"></script>
     </body>
 </html>

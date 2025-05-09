@@ -3,12 +3,18 @@ window.onload = function () {
 
     document.getElementById('applyBtn').addEventListener('click', () => {
         const vertical = parseInt(document.getElementById('vertical').value);
+        localStorage.setItem("vertical",vertical);
         const horizontal = parseInt(document.getElementById('horizontal').value);
+        localStorage.setItem("horizontal",horizontal);
         const deleteRight = parseInt(document.getElementById('deleteRight').value) || 0;
+        localStorage.setItem("deleteRight",deleteRight);
         const deleteLeft = parseInt(document.getElementById('deleteLeft').value) || 0;
+        localStorage.setItem("deleteLeft",deleteLeft);
         const eyesightText = document.getElementById('eyesight').value.trim();
+        localStorage.setItem("eyesightText",eyesightText);
         const eyesightList = eyesightText ? eyesightText.split(',').map(x => x.trim()) : [];
         const girlSeatsText = document.getElementById('girlsSeats').value.trim();
+        localStorage.setItem("girlSeatsText",girlSeatsText);
         const girlSeatIndexes = girlSeatsText ? girlSeatsText.split(',').map(x => parseInt(x.trim())) : [];
 
         const fileInput = document.getElementById('userJson');
