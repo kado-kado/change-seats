@@ -6,4 +6,5 @@ function showSection(sectionId) {
     if (target) {
         target.classList.add('active');
     }
+    saveLocalstorage();
 }

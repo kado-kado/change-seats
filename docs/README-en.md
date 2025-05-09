@@ -35,9 +35,12 @@ root/
 │   ├── change-section.js
 │   ├── export.js
 │   └── hint.js
+├── docs/
+|    ├── README.md (Japanese)
+|    ├── README-en.md (English)
+|    └── DEVELOPER_NOTE.md
 ├── LICENSE
-├── README.md (Japanese)
-└── README-en.md (English)
+└── README.md (root)
 ```
 
 ## JSON Input Format
