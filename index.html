@@ -8,6 +8,7 @@
         <link href="styles/section-settings.css" rel="stylesheet" />
         <link href="styles/main.css" rel="stylesheet" />
         <link href="styles/section-main.css" rel="stylesheet" />
+        <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" disabled/>
     </head>
 
     <body>
@@ -18,6 +19,9 @@
                 <li><a href="#" onclick="showSection('Settings')">Settings</a></li>
                 <li><a href="#" onclick="showSection('README')">README</a></li>
                 <li><a href="#" onclick="showSection('Info')">Info</a></li>
+                <li><br></li>
+                <li><a href="#" onclick="toggleUI()">UI</a></li>
+                <li><a href="#" id="closeBtn">閉じる</a></li>
             </ul>
         </nav>
 
@@ -82,11 +86,13 @@
                 root/
                 ├── index.html
                 ├── main.js
+                ├── preload.js
                 ├── package.json
                 ├── styles/
                 |       ├── main.css
                 |       ├── section-main.css
                 |       ├── section-settings.css
+                |       ├── neumorphismUI.css
                 |       └── sidebar.css
                 ├── scripts/
                 |       ├── main.js
@@ -94,6 +100,8 @@
                 |       ├── change-section.js
                 |       ├── export.js
                 |       ├── localstorage.js
+                |       ├── toggleUI.js
+                |       ├── windowControl.js
                 |       └── hint.js
                 ├── docs/
                 |       ├── README.md
@@ -151,7 +159,7 @@
                     style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
                     />
                 </a>
-                <p>change-seats ver. 1.3.0</p>
+                <p>change-seats ver. 2.0.0</p>
                 <p>
                     © 2025 <a href="https://github.com/kado-kado">kado-kado</a>.
                     Developed with
@@ -170,5 +178,8 @@
         <script src="scripts/export.js"></script>
         <script src="scripts/hint.js"></script>
         <script src="scripts/localstorage.js"></script>
+        <script src="scripts/windowControl.js"></script>
+        <script src="preload.js"></script>
+        <script src="scripts/toggleUI.js"></script>
     </body>
 </html>

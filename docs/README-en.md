@@ -28,12 +28,15 @@ root/
 │   ├── main.css
 │   ├── section-main.css
 │   ├── section-settings.css
+│   ├── neumorphismUI.css
 │   └── sidebar.css
 ├── scripts/
 │   ├── main.js
 │   ├── animation.js
 │   ├── change-section.js
 │   ├── export.js
+│   ├── toggleUI.js
+│   ├── windowControl.js
 │   └── hint.js
 ├── docs/
 |    ├── README.md (Japanese)

@@ -16,12 +16,15 @@ root/
 │   ├── main.css
 │   ├── section-main.css
 │   ├── section-settings.css
+│   ├── neumorphismUI.css
 │   └── sidebar.css
 ├── scripts/
 │   ├── main.js
 │   ├── animation.js
 │   ├── change-section.js
 │   ├── export.js
+│   ├── toggleUI.js
+│   ├── windowControl.js
 │   └── hint.js
 ├── docs/
 |    ├── README.md (日本語)
@@ -79,6 +82,7 @@ root/
 * `sidebar.css`：サイドメニューの色・レイアウト設定
 * `.seat`：座席セルの非表示・表示切替アニメーション
 * `.show-seat`：表示時に `opacity` / `translateY` アニメーション適用
+* UIを選択することでUIを変更できます。
 
 ---
 
