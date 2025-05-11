@@ -23,14 +23,6 @@ function createWindow() {
     ipcMain.on('app-close', () => {
         win.close();
     });
-
-    ipcMain.on('app-toggle-maximize', () => {
-        if (win.isMaximized()) {
-            win.unmaximize();
-        } else {
-            win.maximize();
-        }
-    });
 }
 
 app.whenReady().then(() => {

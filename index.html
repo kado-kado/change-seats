@@ -8,7 +8,8 @@
         <link href="styles/section-settings.css" rel="stylesheet" />
         <link href="styles/main.css" rel="stylesheet" />
         <link href="styles/section-main.css" rel="stylesheet" />
-        <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" disabled/>
+        <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" />
+        <link href="styles/load.css" rel="stylesheet" />
     </head>
 
     <body>
@@ -18,13 +19,18 @@
                 <li><a href="#" onclick="showSection('Main')">Main</a></li>
                 <li><a href="#" onclick="showSection('Settings')">Settings</a></li>
                 <li><a href="#" onclick="showSection('README')">README</a></li>
-                <li><a href="#" onclick="showSection('Info')">Info</a></li>
+                <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
                 <li><br></li>
                 <li><a href="#" onclick="toggleUI()">UI</a></li>
                 <li><a href="#" id="closeBtn">閉じる</a></li>
             </ul>
         </nav>
-
+        <div id="load-overlay">
+            <div id="load-box">
+                <div id="load-task-list"></div>
+                <div id="load-complete" style="display: none;">Complete</div>
+            </div>
+        </div>
         <main id="main">
             <section id="Main" class="content-section">
                 <div id="Board">
@@ -89,24 +95,24 @@
                 ├── preload.js
                 ├── package.json
                 ├── styles/
-                |       ├── main.css
-                |       ├── section-main.css
-                |       ├── section-settings.css
-                |       ├── neumorphismUI.css
-                |       └── sidebar.css
+                |         ├── main.css
+                |         ├── section-main.css
+                |         ├── section-settings.css
+                |         ├── neumorphismUI.css
+                |         └── sidebar.css
                 ├── scripts/
-                |       ├── main.js
-                |       ├── animation.js
-                |       ├── change-section.js
-                |       ├── export.js
-                |       ├── localstorage.js
-                |       ├── toggleUI.js
-                |       ├── windowControl.js
-                |       └── hint.js
+                |         ├── main.js
+                |         ├── animation.js
+                |         ├── change-section.js
+                |         ├── export.js
+                |         ├── localstorage.js
+                |         ├── toggleUI.js
+                |         ├── windowControl.js
+                |         └── hint.js
                 ├── docs/
-                |       ├── README.md
-                |       ├── README-en.md
-                |       └── DEVELOPER_NOTE.md
+                |         ├── README.md
+                |         ├── README-en.md
+                |         └── DEVELOPER_NOTE.md
                 ├── LICENSE
                 └── README.md
                 </pre>
@@ -150,36 +156,71 @@
                 <h2>ライセンス</h2>
                 <p>MIT</p>
             </section>
-            <section id="Info" class="content-section">
-                <div id="repo-info"></div>
-                <a href="https://github.com/kado-kado/change-seats" target="_blank" style="display:inline-block; text-decoration:none;">
-                    <img 
-                    src="https://opengraph.githubassets.com/1/kado-kado/change-seats" 
-                    alt="GitHub Repository OG Image" 
-                    style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
-                    />
-                </a>
-                <p>change-seats ver. 2.0.0</p>
-                <p>
-                    © 2025 <a href="https://github.com/kado-kado">kado-kado</a>.
-                    Developed with
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a>,
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a>,
-                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</a>,
-                    <a href="https://nodejs.org/" target="_blank">Node.js</a>,
-                    and
-                    <a href="https://www.electronjs.org/" target="_blank">Electron</a>.
-                </p>
+            <section id="Credits" class="content-section" style="padding: 2em; background: #f9f9f9; border-top: 1px solid #ddd;">
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <h2 style="font-size: 1.8em; margin-bottom: 1em;">Credits</h2>
+
+                    <div id="repo-info"></div>
+
+                    <a href="https://github.com/kado-kado/change-seats" target="_blank" style="display:inline-block; text-decoration:none; margin-bottom: 1em;">
+                        <img 
+                        src="https://opengraph.githubassets.com/1/kado-kado/change-seats" 
+                        alt="GitHub Repository OG Image" 
+                        style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
+                        />
+                    </a>
+
+                    <p style="font-size: 1.1em; margin-top: 1em;">
+                        <strong><a href="https://github.com/kado-kado/change-seats">change-seats</a></strong> ver. 2.1.0
+                    </p>
+
+                    <p style="margin-top: 1.5em; font-size: 0.95em; color: #444;">
+                        © 2025 <a href="https://github.com/kado-kado">kado-kado</a> . <br><br>
+                        Developed with  
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> , 
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> , 
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</a> , 
+                        <a href="https://nodejs.org/" target="_blank">Node.js</a>,
+                        and 
+                        <a href="https://www.electronjs.org/" target="_blank">Electron</a> .
+                    </p>
+
+                    <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+
+                    <p style="font-size: 1em;">Special Thanks: <strong>George Hoqqanen</strong></p>
+
+                    <iframe 
+                        height="300" 
+                        style="width: 100%; max-width: 600px; border: none; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" 
+                        scrolling="no" 
+                        title="Corange Loading Screen" 
+                        src="https://codepen.io/hoqqanen/embed/zvqGEG?default-tab=result&theme-id=light" 
+                        loading="lazy" 
+                        allowtransparency="true" 
+                        allowfullscreen="true">
+                    </iframe>
+
+                    <p style="font-size: 0.85em; margin-top: 0.5em;">
+                        See the Pen <a href="https://codepen.io/hoqqanen/pen/zvqGEG">Corange Loading Screen</a> by 
+                        <a href="https://codepen.io/hoqqanen">@hoqqanen</a> on <a href="https://codepen.io">CodePen</a>.
+                    </p>
+                </div>
             </section>
         </main>
-        <script src="scripts/main.js"></script>
-        <script src="scripts/animation.js"></script>
-        <script src="scripts/change-section.js"></script>
-        <script src="scripts/export.js"></script>
-        <script src="scripts/hint.js"></script>
-        <script src="scripts/localstorage.js"></script>
-        <script src="scripts/windowControl.js"></script>
-        <script src="preload.js"></script>
-        <script src="scripts/toggleUI.js"></script>
+        <script src="scripts/load.js" onload="taskName('load.js')"></script>
+        <script src="scripts/main.js" onload="taskName('main.js')"></script>
+        <script src="scripts/animation.js" onload="taskName('animation.js')"></script>
+        <script src="scripts/change-section.js" onload="taskName('change-section.js')"></script>
+        <script src="scripts/export.js" onload="taskName('section.js')"></script>
+        <script src="scripts/hint.js" onload="taskName('hint.js')"></script>
+        <script src="scripts/localstorage.js" onload="taskName('localstorage.js')"></script>
+        <script src="scripts/windowControl.js" onload="taskName('windowControl.js')"></script>
+        <script src="preload.js" onload="taskName('preload.js')"></script>
+        <script src="scripts/toggleUI.js" onload="taskName('toggleUI.js')"></script>
+        <script>
+            window.addEventListener('load', () => {
+                taskName(0);
+            });
+        </script>
     </body>
 </html>
