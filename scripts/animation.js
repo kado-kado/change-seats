@@ -11,6 +11,7 @@ function animateSeats() {
     shuffledSeats.forEach((seat, index) => {
         setTimeout(() => {
             seat.classList.add('show-seat');
+            alert('席表示するね？');
         }, index * delayUnit + Math.random() * 200); // ランダム要素あり
     });
 }

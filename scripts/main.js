@@ -2,6 +2,8 @@ window.onload = function () {
     showSection('README');
 
     document.getElementById('applyBtn').addEventListener('click', () => {
+        alert('ボタン押しちゃったね？');
+        alert('今から確認するね！！');
         const vertical = parseInt(document.getElementById('vertical').value);
         localStorage.setItem("vertical",vertical);
         const horizontal = parseInt(document.getElementById('horizontal').value);
@@ -21,11 +23,13 @@ window.onload = function () {
         const file = fileInput.files[0];
 
         if (!vertical || !horizontal || !file) {
-            alert("縦横の席数とJSONファイルを指定してください。");
+            alert("縦横の席数とJSONファイルを指定してね！！");
+            alert('なめてんのか？');
             return;
         }
 
         const reader = new FileReader();
+        alert('今から、jsonファイル見るね？');
         reader.onload = function (e) {
             try {
                 const students = JSON.parse(e.target.result);
@@ -34,7 +38,8 @@ window.onload = function () {
                 if (girlSeatIndexes.length > 0) {
                     const girlCount = students.filter(s => s.gender === 'female').length;
                     if (girlSeatIndexes.length !== girlCount) {
-                        alert("女子の人数と女子専用席数が一致しません。");
+                        alert("女子の人数と女子専用席数が一致しないよ？");
+                        alert('女子のこと嫌い？');
                         return;
                     }
                 }
@@ -106,12 +111,16 @@ window.onload = function () {
                     }
                 }
 
+                alert('内部処理は大方終わったよ。');
+
                 displaySeats(seats2D);
                 showSection('Main');
                 setTimeout(() => animateSeats(), 100);
 
             } catch (err) {
                 alert("JSONの読み込みに失敗しました。形式が正しいか確認してください。");
+                alert('なめてんのか？');
+                alert('事前に作れよ！！！');
                 console.error(err);
             }
         };
@@ -148,6 +157,7 @@ function displaySeats(seats) {
                     ${seat.name} (${seat.number})
                 </td>`;
             }
+            alert('今席組み立ててるよ？');
         }
         output += "</tr>";
     }

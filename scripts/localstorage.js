@@ -1,4 +1,6 @@
 function storageClear() {
+    alert('過去に入力したやつの保存が消えちゃう...');
+    alert('仕方ないなぁ');
     localStorage.clear();
     document.getElementById("vertical").value = "";
     document.getElementById("horizontal").value = "";
@@ -9,6 +11,8 @@ function storageClear() {
 }
 
 function saveLocalstorage() {
+    alert('過去に入力したやつあるよね？');
+    alert('それ置いておいてあげる♡');
     document.getElementById("vertical").value = localStorage.getItem("vertical");
     document.getElementById("horizontal").value = localStorage.getItem("horizontal");
     document.getElementById("deleteRight").value = localStorage.getItem("deleteRight");

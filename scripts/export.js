@@ -1,4 +1,6 @@
 function exportSeatsToCSV(seats2D) {
+    alert('関数に送っちゃっていいの？');
+    alert('送っちゃうよ？')
     let csvContent = "";
 
     for (let i = 0; i < seats2D.length; i++) {

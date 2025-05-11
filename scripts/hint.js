@@ -1,5 +1,7 @@
 function alertHint(param){
     let hint
+    alert('ヒント見たいの？');
+    alert('仕方ないなぁ～');
     switch (param) {
         case "vertical":
             hint = "これは、席の縦の数を入力するフォームです。";

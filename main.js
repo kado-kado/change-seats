@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
 let win;
@@ -13,7 +13,6 @@ function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
-            nodeIntegration: false,
             nodeIntegration: false
         }
     });
@@ -34,13 +33,29 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-    createWindow();
+    let result;
+
+    // 「起動する」が選ばれるまでループ
+    while (true) {
+        result = dialog.showMessageBoxSync({
+            type: 'question',
+            buttons: ['起動するよね？？？？？？？？？', '押しちゃだめだよ！！'],
+            title: 'ねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇねぇ',
+            message: '開きたいよね！！！！'
+        });
+
+        if (result === 0) {
+            // 起動する → ウィンドウを作成
+            createWindow();
+            break;
+        }
+        // キャンセル → ループ継続（何もせずもう一度出す）
+    }
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
 });
-
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });

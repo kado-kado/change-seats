@@ -1,6 +1,8 @@
 function toggleUI() {
+    alert('見た目変えちゃうの？');
+    alert('ユニバーサルデザイン？なんそれ？');
     const Neumorphism = document.getElementById('neumorphism');
     if (!Neumorphism) return;
 
-    Neumorphism.disabled = !Neumorphism.disabled; // 現在の状態を反転
+    Neumorphism.disabled = !Neumorphism.disabled;
 }
