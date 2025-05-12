@@ -31,8 +31,8 @@ function showNextTask() {
             overlay.style.opacity = 0;
             setTimeout(() => {
                 overlay.style.display = 'none';
-            }, 2000);
-        }, 2000);
+            }, 1000);
+        }, 1000);
         isProcessing = false;
         return;
     }
@@ -54,5 +54,5 @@ function showNextTask() {
     row.appendChild(label);
     list.appendChild(row);
 
-    setTimeout(showNextTask, 2200);
+    setTimeout(showNextTask, 100);
 }

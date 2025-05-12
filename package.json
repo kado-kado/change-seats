@@ -3,6 +3,16 @@
     "version": "2.1.0",
     "description": "change-seats",
     "main": "main.js",
+    "build": {
+        "files": [
+            "main.js",
+            "index.html",
+            "styles/**",
+            "scripts/**",
+            "preload.js",
+            "package.json"
+        ]
+    },
     "scripts": {
         "start": "electron .",
         "build": "electron-builder"

@@ -4,12 +4,12 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>change-seats</title>
-        <link href="styles/sidebar.css" rel="stylesheet" />
-        <link href="styles/section-settings.css" rel="stylesheet" />
-        <link href="styles/main.css" rel="stylesheet" />
-        <link href="styles/section-main.css" rel="stylesheet" />
-        <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" />
-        <link href="styles/load.css" rel="stylesheet" />
+        <link href="styles/sidebar.css" rel="stylesheet" onload="taskName('sidebar.css')"/>
+        <link href="styles/section-settings.css" rel="stylesheet" onload="taskName('section-settings.css')"/>
+        <link href="styles/main.css" rel="stylesheet" onload="taskName('main.css')"/>
+        <link href="styles/section-main.css" rel="stylesheet" onload="taskName('section-main.css')"/>
+        <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" onload="taskName('neumorphismUI.css')"/>
+        <link href="styles/load.css" rel="stylesheet" onload="taskName('load.css')"/>
     </head>
 
     <body>
@@ -27,8 +27,8 @@
         </nav>
         <div id="load-overlay">
             <div id="load-box">
-                <div id="load-task-list"></div>
-                <div id="load-complete" style="display: none;">Complete</div>
+                <div id="load-task-list"><h3>Loading...</h3></div>
+                <div id="load-complete" style="display: none;">Success</div>
             </div>
         </div>
         <main id="main">
