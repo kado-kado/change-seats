@@ -1,4 +1,5 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog} = require('electron');
+ExcelJS = require('exceljs');
 const path = require('path');
 
 let win;
@@ -14,7 +15,6 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
             nodeIntegration: false,
-            nodeIntegration: false,
             inspectable: false
         }
     });
@@ -22,11 +22,35 @@ function createWindow() {
     win.loadFile('index.html');
 
     win.webContents.on('devtools-opened', () => {
-    win.webContents.closeDevTools();
     });
 
     ipcMain.on('app-close', () => {
         win.close();
+    });
+    ipcMain.handle('export-excel', async (event, seatsData) => {
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet('Seats');
+
+    worksheet.columns = [
+        { header: 'Number', key: 'number', width: 10 },
+        { header: 'Name', key: 'name', width: 30 },
+    ];
+
+    seatsData.forEach(seat => {
+        worksheet.addRow({ number: seat.number, name: seat.name });
+    });
+
+    const filePath = path.join(app.getPath('desktop'), 'seats.xlsx');
+    await workbook.xlsx.writeFile(filePath);
+
+    dialog.showMessageBox(win, {
+        type: 'info',
+        title: 'Export Successful',
+        message: `File saved at: ${filePath}`,
+    });
+
+        return filePath;
     });
 }
 

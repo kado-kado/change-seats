@@ -21,7 +21,6 @@ button {
     background-color: #3498db;
     color: white;
     border-radius: 4px;
-    cursor: pointer;
     transition: background-color 0.3s;
 }
 
@@ -37,7 +36,6 @@ button:hover {
     background-color: #eeeb2e;
     color: black;
     border-radius: 4px;
-    cursor: pointer;
     transition: background-color 0.3s;
 }
 

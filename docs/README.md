@@ -28,6 +28,7 @@ root/
 ├── styles/
 │   ├── main.css
 │   ├── section-main.css
+|   ├── cursor.css
 │   ├── section-settings.css
 │   ├── neumorphismUI.css
 │   └── sidebar.css
@@ -36,14 +37,17 @@ root/
 │   ├── animation.js
 │   ├── change-section.js
 │   ├── export.js
+|   ├── cursor.js
 │   ├── toggleUI.js
 │   ├── windowControl.js
 │   └── hint.js
 ├── docs/
 |    ├── README.md (日本語)
 |    ├── README-en.md (English)
+|    ├── THIRD_PARTY.md
 |    └── DEVELOPER_NOTE.md
 ├── LICENSE
+├── SECURITY.md
 └── README.md (root)
 ```
 
@@ -81,3 +85,8 @@ root/
 ## ライセンス
 
 MIT
+
+## 謝辞
+
+このプロジェクトには、MITライセンスのもとで提供されているサードパーティのコードが含まれています。
+詳細は [THIRD_PARTY.md](./THIRD_PARTY.md) をご覧ください。
