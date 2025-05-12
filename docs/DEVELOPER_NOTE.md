@@ -15,6 +15,7 @@ root/
 ├── styles/
 │   ├── main.css
 │   ├── section-main.css
+|   ├── cursor.css
 │   ├── section-settings.css
 │   ├── neumorphismUI.css
 │   └── sidebar.css
@@ -23,14 +24,17 @@ root/
 │   ├── animation.js
 │   ├── change-section.js
 │   ├── export.js
+|   ├── cursor.js
 │   ├── toggleUI.js
 │   ├── windowControl.js
 │   └── hint.js
 ├── docs/
 |    ├── README.md (日本語)
 |    ├── README-en.md (English)
+|    ├── THIRD_PARTY.md
 |    └── DEVELOPER_NOTE.md
 ├── LICENSE
+├── SECURITY.md
 └── README.md (root)
 ```
 
@@ -64,7 +68,7 @@ root/
 
 * `exportSeatsToCSV()` で `seats2D` 配列をCSV文字列化。
 * `Blob + createObjectURL` によりローカルで `seats.csv` をダウンロード。
-* UTF-8 形式、Shift-JISは非採用（※必要時に変換要）。
+* BOM付きUTF-8 形式、。
 
 ### `localstorage.js`
 
@@ -74,6 +78,10 @@ root/
 
 * `alertHint(param)` により対象フォームに応じた説明を `alert()`。
 * `switch(param)` で分岐管理し、UX補助として機能。
+
+### `cursor.js`
+
+* `cursor`の見た目の変更を行う。
 
 ### CSS（スタイルファイル）
 

@@ -1,6 +1,6 @@
 {
     "name": "change-seats",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "description": "change-seats",
     "main": "main.js",
     "build": {
@@ -22,5 +22,8 @@
         "electron-builder": "^24.13.3"
     },
     "author": "kado-kado",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "exceljs": "^4.4.0"
+    }
 }

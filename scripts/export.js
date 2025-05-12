@@ -1,4 +1,4 @@
-function exportSeatsToCSV(seats2D) {
+function exportCSV_UTF8_BOM(seats2D) {
     let csvContent = "";
 
     for (let i = 0; i < seats2D.length; i++) {
@@ -13,16 +13,17 @@ function exportSeatsToCSV(seats2D) {
         csvContent += row + "\n";
     }
 
-    const blob = new Blob([new TextEncoder("utf-8").encode(csvContent)], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement('a');
-    if (link.download !== undefined) {
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'seats.csv');
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-    alert('Excelでインポートする場合は、UTF-8のため文字化けする恐れがあります。');
+    // UTF-8 BOM（バイト順マーク）を先頭に付ける
+    const BOM = new Uint8Array([0xEF, 0xBB, 0xBF]);
+    const utf8Encoded = new TextEncoder().encode(csvContent);
+    const blob = new Blob([BOM, utf8Encoded], { type: "text/csv;charset=utf-8;" });
+
+    // ダウンロード処理
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = "seats_utf8_bom.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }

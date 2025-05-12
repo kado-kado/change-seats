@@ -10,6 +10,7 @@
         <link href="styles/section-main.css" rel="stylesheet" onload="taskName('section-main.css')"/>
         <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" onload="taskName('neumorphismUI.css')"/>
         <link href="styles/load.css" rel="stylesheet" onload="taskName('load.css')"/>
+        <link href="styles/cursor.css" rel="stylesheet" onload="taskName('cursor.css')" />
     </head>
 
     <body>
@@ -18,10 +19,10 @@
             <ul class="menu-list">
                 <li><a href="#" onclick="showSection('Main')">Main</a></li>
                 <li><a href="#" onclick="showSection('Settings')">Settings</a></li>
-                <li><a href="#" onclick="showSection('README')">README</a></li>
-                <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
                 <li><br></li>
                 <li><a href="#" onclick="toggleUI()">UI</a></li>
+                <li><a href="#" onclick="showSection('README')">README</a></li>
+                <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
                 <li><a href="#" id="closeBtn">閉じる</a></li>
             </ul>
         </nav>
@@ -72,7 +73,7 @@
                 <br>
                 <button id="storageClear" onclick="storageClear()">クリア</button>
                 <br>
-                <button id="export" onclick="exportSeatsToCSV(currentSeats2D)">CSV出力</button>
+                <button id="export" onclick="exportCSV_UTF8_BOM(currentSeats2D)">CSV出力</button>
             </section>
             <section id="README" class="content-section">
                 <h1>change-seats</h1>
@@ -93,9 +94,9 @@
                 ├── index.html
                 ├── main.js
                 ├── preload.js
-                ├── package.json
                 ├── styles/
                 |         ├── main.css
+                |         ├── cursor.css
                 |         ├── section-main.css
                 |         ├── section-settings.css
                 |         ├── neumorphismUI.css
@@ -105,16 +106,13 @@
                 |         ├── animation.js
                 |         ├── change-section.js
                 |         ├── export.js
+                |         ├── cursor.js
                 |         ├── localstorage.js
                 |         ├── toggleUI.js
                 |         ├── windowControl.js
                 |         └── hint.js
-                ├── docs/
-                |         ├── README.md
-                |         ├── README-en.md
-                |         └── DEVELOPER_NOTE.md
-                ├── LICENSE
-                └── README.md
+                └── package.json
+
                 </pre>
 
                 <h2>使用方法</h2>
@@ -171,7 +169,7 @@
                     </a>
 
                     <p style="font-size: 1.1em; margin-top: 1em;">
-                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 2.1.0
+                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 2.2.0
                     </p>
 
                     <p style="margin-top: 1.5em; font-size: 0.95em; color: #444;">
@@ -204,8 +202,33 @@
                         See the Pen <a href="https://codepen.io/hoqqanen/pen/zvqGEG" target="_blank">Corange Loading Screen</a> by 
                         <a href="https://codepen.io/hoqqanen" target="_blank">@hoqqanen</a> on <a href="https://codepen.io" target="_blank">CodePen</a>.
                     </p>
+
+                    <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+
+                    <p style="font-size: 1em;">Special Thanks: <strong>spiqa design</strong></p>
+
+                    <iframe 
+                        height="300" 
+                        style="width: 100%; max-width: 600px; border: none; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" 
+                        scrolling="no" 
+                        title="マウスカーソルの見た目を変更する" 
+                        src="https://codepen.io/spiqa_design/embed/JjbwKBO?default-tab=result&theme-id=light" 
+                        loading="lazy" 
+                        allowtransparency="true" 
+                        allowfullscreen="true">
+                    </iframe>
+
+                    <p style="font-size: 0.85em; margin-top: 0.5em;">
+                        See the Pen <a href="https://codepen.io/spiqa_design/pen/JjbwKBO" target="_blank">マウスカーソルの見た目を変更する</a> by 
+                        <a href="https://codepen.io/spiqa_design" target="_blank">@spiqa_design</a> on <a href="https://codepen.io" target="_blank">CodePen</a>.
+                    </p>
+
+                    <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+
+                    <p style="font-size: 1em;">Special Thanks: <strong>ReI</strong></p>
                 </div>
             </section>
+            <div id="cursor" class="cursor"></div>
         </main>
         <script src="scripts/load.js" onload="taskName('load.js')"></script>
         <script src="scripts/main.js" onload="taskName('main.js')"></script>
@@ -214,8 +237,8 @@
         <script src="scripts/export.js" onload="taskName('section.js')"></script>
         <script src="scripts/hint.js" onload="taskName('hint.js')"></script>
         <script src="scripts/localstorage.js" onload="taskName('localstorage.js')"></script>
+        <script src="scripts/cursor.js" onload="taskName('cursor.js')"></script>
         <script src="scripts/windowControl.js" onload="taskName('windowControl.js')"></script>
-        <script src="preload.js" onload="taskName('preload.js')"></script>
         <script src="scripts/toggleUI.js" onload="taskName('toggleUI.js')"></script>
         <script>
             window.addEventListener('load', () => {

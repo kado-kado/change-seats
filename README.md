@@ -10,3 +10,9 @@
 
 ## LICENSE
 [MIT](LICENSE)
+
+## Acknowledgements
+[THIRD_PARTY.md](docs/THIRD_PARTY.md)
+
+##  Security Policy
+[SECURITY.md](SECURITY.md)
