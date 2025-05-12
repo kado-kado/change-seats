@@ -14,11 +14,16 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
             nodeIntegration: false,
-            nodeIntegration: false
+            nodeIntegration: false,
+            inspectable: false
         }
     });
 
     win.loadFile('index.html');
+
+    win.webContents.on('devtools-opened', () => {
+    win.webContents.closeDevTools();
+    });
 
     ipcMain.on('app-close', () => {
         win.close();
