@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>change-seats</title>
+        <link href="styles/sidebar.css" rel="stylesheet" onload="taskName('sidebar.css')"/>
+        <link href="styles/section-settings.css" rel="stylesheet" onload="taskName('section-settings.css')"/>
+        <link href="styles/main.css" rel="stylesheet" onload="taskName('main.css')"/>
+        <link href="styles/section-main.css" rel="stylesheet" onload="taskName('section-main.css')"/>
+        <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" onload="taskName('neumorphismUI.css')"/>
+        <link href="styles/load.css" rel="stylesheet" onload="taskName('load.css')"/>
+        <link href="styles/cursor.css" rel="stylesheet" onload="taskName('cursor.css')" />
+    </head>
+
+    <body>
+        <nav id="sidebar">
+            <h2>Menu</h2>
+            <ul class="menu-list">
+                <li><a href="#" onclick="showSection('Main')">Main</a></li>
+                <li><a href="#" onclick="showSection('Settings')">Settings</a></li>
+                <li><br></li>
+                <li><a href="#" onclick="toggleUI()">UI</a></li>
+                <li><a href="#" onclick="showSection('README')">README</a></li>
+                <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
+            </ul>
+        </nav>
+        <div id="load-overlay">
+            <div id="load-box">
+                <div id="load-task-list"><h3>Loading...</h3></div>
+                <div id="load-complete" style="display: none;">Success</div>
+            </div>
+        </div>
+        <main id="main">
+            <section id="Main" class="content-section">
+                <div id="Board">
+                    <p>黒板</p>
+                </div>
+                <div id="sheets"></div>
+            </section>
+            <section id="Settings" class="content-section">
+                <h1>Settings</h1>
+                <label for="vertical">縦の席数:</label>
+                <input type="number" id="vertical" name="vertical" min="1" max="8" />
+                <button class="hint" onclick="alertHint('vertical')">hint</button>
+                <br>
+                <label for="horizontal">横の席数:</label>
+                <input type="number" id="horizontal" name="horizontal" min="1" max="8" />
+                <button class="hint" onclick="alertHint('horizontal')">hint</button>
+                <br>
+                <label for="deleteRight">右から削除する席数(任意):</label>
+                <input type="number" id="deleteRight" name="deleteRight" min="0" max="8" />
+                <button class="hint" onclick="alertHint('deleteRight')">hint</button>
+                <br>
+                <label for="deleteLeft">左から削除する席数(任意):</label>
+                <input type="number" id="deleteLeft" name="deleteLeft" min="0" max="8" />
+                <button class="hint" onclick="alertHint('deleteLeft')">hint</button>
+                <br>
+                <label for="eyesight">前の席(任意):</label>
+                <input type="text" id="eyesight" name="eyesight" />
+                <button class="hint" onclick="alertHint('eyesight')">hint</button>
+                <br>
+                <label for="girlsSeats">女子席リスト(任意): </label>
+                <input type="text" id="girlsSeats" name="girlsSeats" />
+                <button class="hint" onclick="alertHint('girlsSeats')">hint</button>
+                <br>
+                <label for="userJson">JSONファイルを選択:</label>
+                <input type="file" id="userJson" name="userJson" accept="application/json" />
+                <button class="hint" onclick="alertHint('userJson')">hint</button>
+                <br>
+                <button id="applyBtn">Apply</button>
+                <br>
+                <button id="storageClear" onclick="storageClear()">クリア</button>
+                <br>
+                <button id="export" onclick="exportCSV_UTF8_BOM(currentSeats2D)">CSV出力</button>
+            </section>
+            <section id="README" class="content-section">
+                <h1>change-seats</h1>
+                <p>学校などで使用できる、<strong>視力・性別・席希望</strong>を考慮した席替えシステムです。CSV出力にも対応しています。</p>
+                <p>オフラインで動作します。</p>
+
+                <h2>主な機能</h2>
+                <ul>
+                    <li>名前と出席番号を元にランダム席割り</li>
+                    <li>女子専用席の指定</li>
+                    <li>視力の弱い生徒を前方席に配置</li>
+                    <li>CSVエクスポート（Excelで開ける形式）</li>
+                </ul>
+
+                <h2>ファイル構成</h2>
+                <pre>
+                root/
+                ├── index.html
+                ├── main.js
+                ├── preload.js
+                ├── styles/
+                |         ├── main.css
+                |         ├── cursor.css
+                |         ├── section-main.css
+                |         ├── section-settings.css
+                |         ├── neumorphismUI.css
+                |         └── sidebar.css
+                ├── scripts/
+                |         ├── main.js
+                |         ├── animation.js
+                |         ├── change-section.js
+                |         ├── export.js
+                |         ├── cursor.js
+                |         ├── localstorage.js
+                |         ├── toggleUI.js
+                |         ├── windowControl.js
+                |         └── hint.js
+                └── package.json
+
+                </pre>
+
+                <h2>使用方法</h2>
+                <ol>
+                    <li><strong>change-seats.exe</strong>を開く</li>
+                    <li>生徒の名前・出席番号を入力（JSONやフォーム）</li>
+                    <li>「女子席」や「前の席希望」などのオプションを指定</li>
+                    <li>席割りを生成</li>
+                    <li>必要に応じて「CSV出力」ボタンをクリック</li>
+                    <p>※1 任意のタグがある場所は入力しなくても動きます。</p>
+                    <p>※2 女子席の指定により、班分けをスムーズにしています。</p>
+                </ol>
+
+                <h2>入力仕様（JSON想定）</h2>
+                <pre>
+                [
+                    { "name": "田中", "number": 1, "gender": "male" },
+                    { "name": "鈴木", "number": 2, "gender": "female" }
+                ]
+                </pre>
+                <p>性別や希望（女子席・前の席希望）はHTMLフォームで指定できます。</p>
+
+                <h2>CSV出力形式</h2>
+                <ul>
+                    <li>出力ファイル名： <strong>seats.csv</strong></li>
+                    <li>文字コード： <strong>UTF-8</strong></li>
+                    <li>フォーマット： 出席番号,名前</li>
+                </ul>
+
+                <h2>使用技術</h2>
+                <ul>
+                    <li>HTML, CSS, JavaScript</li>
+                    <li>ブラウザベース</li>
+                    <li>CSV出力機能（Blob API）</li>
+                    <li>Node.js</li>
+                    <li>Electron ^29.4.6</li>
+                </ul>
+
+                <h2>ライセンス</h2>
+                <p>MIT</p>
+            </section>
+            <section id="Credits" class="content-section" style="padding: 2em; background: #f9f9f9; border-top: 1px solid #ddd;">
+                <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                    <h2 style="font-size: 1.8em; margin-bottom: 1em;">Credits</h2>
+
+                    <div id="repo-info"></div>
+
+                    <a href="https://github.com/kado-kado/change-seats" target="_blank" style="display:inline-block; text-decoration:none; margin-bottom: 1em;">
+                        <img 
+                        src="https://opengraph.githubassets.com/1/kado-kado/change-seats" 
+                        alt="GitHub Repository OG Image" 
+                        style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
+                        />
+                    </a>
+
+                    <p style="font-size: 1.1em; margin-top: 1em;">
+                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 2.2.0
+                    </p>
+
+                    <p style="margin-top: 1.5em; font-size: 0.95em; color: #444;">
+                        © 2025 <a href="https://github.com/kado-kado" target="_blank">kado-kado</a> . <br><br>
+                        Developed with  
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> , 
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> , 
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</a> , 
+                        <a href="https://nodejs.org/" target="_blank">Node.js</a>,
+                        and 
+                        <a href="https://www.electronjs.org/" target="_blank">Electron</a> .
+                    </p>
+
+                    <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+
+                    <p style="font-size: 1em;">Special Thanks: <strong>George Hoqqanen</strong></p>
+
+                    <iframe 
+                        height="300" 
+                        style="width: 100%; max-width: 600px; border: none; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" 
+                        scrolling="no" 
+                        title="Corange Loading Screen" 
+                        src="https://codepen.io/hoqqanen/embed/zvqGEG?default-tab=result&theme-id=light" 
+                        loading="lazy" 
+                        allowtransparency="true" 
+                        allowfullscreen="true">
+                    </iframe>
+
+                    <p style="font-size: 0.85em; margin-top: 0.5em;">
+                        See the Pen <a href="https://codepen.io/hoqqanen/pen/zvqGEG" target="_blank">Corange Loading Screen</a> by 
+                        <a href="https://codepen.io/hoqqanen" target="_blank">@hoqqanen</a> on <a href="https://codepen.io" target="_blank">CodePen</a>.
+                    </p>
+
+                    <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+
+                    <p style="font-size: 1em;">Special Thanks: <strong>spiqa design</strong></p>
+
+                    <iframe 
+                        height="300" 
+                        style="width: 100%; max-width: 600px; border: none; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" 
+                        scrolling="no" 
+                        title="マウスカーソルの見た目を変更する" 
+                        src="https://codepen.io/spiqa_design/embed/JjbwKBO?default-tab=result&theme-id=light" 
+                        loading="lazy" 
+                        allowtransparency="true" 
+                        allowfullscreen="true">
+                    </iframe>
+
+                    <p style="font-size: 0.85em; margin-top: 0.5em;">
+                        See the Pen <a href="https://codepen.io/spiqa_design/pen/JjbwKBO" target="_blank">マウスカーソルの見た目を変更する</a> by 
+                        <a href="https://codepen.io/spiqa_design" target="_blank">@spiqa_design</a> on <a href="https://codepen.io" target="_blank">CodePen</a>.
+                    </p>
+
+                    <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+
+                    <p style="font-size: 1em;">Special Thanks: <strong>ReI</strong></p>
+                </div>
+            </section>
+            <div id="cursor" class="cursor"></div>
+        </main>
+        <script src="scripts/load.js" onload="taskName('load.js')"></script>
+        <script src="scripts/main.js" onload="taskName('main.js')"></script>
+        <script src="scripts/animation.js" onload="taskName('animation.js')"></script>
+        <script src="scripts/change-section.js" onload="taskName('change-section.js')"></script>
+        <script src="scripts/export.js" onload="taskName('section.js')"></script>
+        <script src="scripts/hint.js" onload="taskName('hint.js')"></script>
+        <script src="scripts/localstorage.js" onload="taskName('localstorage.js')"></script>
+        <script src="scripts/cursor.js" onload="taskName('cursor.js')"></script>
+        <script src="scripts/toggleUI.js" onload="taskName('toggleUI.js')"></script>
+        <script>
+            window.addEventListener('load', () => {
+                taskName(0);
+            });
+        </script>
+    </body>
+</html>

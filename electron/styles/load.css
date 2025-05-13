@@ -1,0 +1,83 @@
+#load-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #e0e0e0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 1.5s ease;
+}
+
+#load-box {
+        background: #f0f0f0;
+        box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;
+        border-radius: 20px;
+        padding: 40px 30px;
+        width: 300px;
+        max-height: 70vh;
+        overflow-y: auto;
+        font-family: sans-serif;
+}
+
+.load-task {
+        display: flex;
+        align-items: center;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1.2s ease forwards;
+        transition: all 2.4s ease;
+}
+
+.load-check {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: inline-block;
+}
+
+.load-check::before,
+.load-check::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 4px;
+    background-color: black;
+    border-radius: 2px;
+    top: 10px;
+    left: 4px;
+    transform-origin: center;
+}
+
+.load-check::before {
+    transform: rotate(45deg);
+    background-color: black;
+}
+
+.load-check::after {
+    transform: rotate(-45deg);
+    background-color: white;
+}
+
+#load-complete {
+        text-align: center;
+        margin-top: 20px;
+        color: #333;
+        font-weight: bold;
+        font-size: 1.2rem;
+        opacity: 0;
+        transition: opacity 2s ease;
+        display: none;
+}
+
+@keyframes fadeInUp {
+        to {
+                opacity: 1;
+                transform: translateY(0);
+        }
+}

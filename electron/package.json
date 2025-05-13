@@ -1,0 +1,29 @@
+{
+    "name": "change-seats",
+    "version": "2.2.0",
+    "description": "change-seats",
+    "main": "main.js",
+    "build": {
+        "files": [
+            "main.js",
+            "index.html",
+            "styles/**",
+            "scripts/**",
+            "preload.js",
+            "package.json"
+        ]
+    },
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder"
+    },
+    "devDependencies": {
+        "electron": "^29.4.6",
+        "electron-builder": "^24.13.3"
+    },
+    "author": "kado-kado",
+    "license": "MIT",
+    "dependencies": {
+        "exceljs": "^4.4.0"
+    }
+}

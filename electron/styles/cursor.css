@@ -1,0 +1,41 @@
+html,
+body,
+a,
+form {
+    cursor: none;
+}
+
+.cursor {
+    position: fixed;
+    top: -5px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
+    transform: translate(0, 0);
+    pointer-events: none;
+}
+
+.cursor.cursor--hover {
+    top: -20px;
+    left: -20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(113, 205, 118, 0.5);
+}
+
+.btn {
+    display: inline-block;
+    min-width: 300px;
+    margin: 20px;
+    padding: 20px;
+    color: #fff;
+    background-color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+}
