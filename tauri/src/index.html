@@ -23,6 +23,7 @@
                 <li><a href="#" onclick="toggleUI()">UI</a></li>
                 <li><a href="#" onclick="showSection('README')">README</a></li>
                 <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
+                <li><a href="#" id="closeBtn">閉じる</a></li>
             </ul>
         </nav>
         <div id="load-overlay">
@@ -76,6 +77,82 @@
             </section>
             <section id="README" class="content-section">
                 <h1>change-seats</h1>
+                <p>学校などで使用できる、<strong>視力・性別・席希望</strong>を考慮した席替えシステムです。CSV出力にも対応しています。</p>
+                <p>オフラインで動作します。</p>
+
+                <h2>主な機能</h2>
+                <ul>
+                    <li>名前と出席番号を元にランダム席割り</li>
+                    <li>女子専用席の指定</li>
+                    <li>視力の弱い生徒を前方席に配置</li>
+                    <li>CSVエクスポート（Excelで開ける形式）</li>
+                </ul>
+
+                <h2>ファイル構成</h2>
+                <pre>
+                root/
+                ├── index.html
+                ├── main.js
+                ├── preload.js
+                ├── styles/
+                |         ├── main.css
+                |         ├── cursor.css
+                |         ├── section-main.css
+                |         ├── section-settings.css
+                |         ├── neumorphismUI.css
+                |         └── sidebar.css
+                ├── scripts/
+                |         ├── main.js
+                |         ├── animation.js
+                |         ├── change-section.js
+                |         ├── export.js
+                |         ├── cursor.js
+                |         ├── localstorage.js
+                |         ├── toggleUI.js
+                |         ├── windowControl.js
+                |         └── hint.js
+                └── package.json
+
+                </pre>
+
+                <h2>使用方法</h2>
+                <ol>
+                    <li><strong>change-seats.exe</strong>を開く</li>
+                    <li>生徒の名前・出席番号を入力（JSONやフォーム）</li>
+                    <li>「女子席」や「前の席希望」などのオプションを指定</li>
+                    <li>席割りを生成</li>
+                    <li>必要に応じて「CSV出力」ボタンをクリック</li>
+                    <p>※1 任意のタグがある場所は入力しなくても動きます。</p>
+                    <p>※2 女子席の指定により、班分けをスムーズにしています。</p>
+                </ol>
+
+                <h2>入力仕様（JSON想定）</h2>
+                <pre>
+                [
+                    { "name": "田中", "number": 1, "gender": "male" },
+                    { "name": "鈴木", "number": 2, "gender": "female" }
+                ]
+                </pre>
+                <p>性別や希望（女子席・前の席希望）はHTMLフォームで指定できます。</p>
+
+                <h2>CSV出力形式</h2>
+                <ul>
+                    <li>出力ファイル名： <strong>seats.csv</strong></li>
+                    <li>文字コード： <strong>UTF-8</strong></li>
+                    <li>フォーマット： 出席番号,名前</li>
+                </ul>
+
+                <h2>使用技術</h2>
+                <ul>
+                    <li>HTML, CSS, JavaScript</li>
+                    <li>ブラウザベース</li>
+                    <li>CSV出力機能（Blob API）</li>
+                    <li>Node.js</li>
+                    <li>Electron ^29.4.6</li>
+                </ul>
+
+                <h2>ライセンス</h2>
+                <p>MIT</p>
             </section>
             <section id="Credits" class="content-section" style="padding: 2em; background: #f9f9f9; border-top: 1px solid #ddd;">
                 <div style="max-width: 800px; margin: 0 auto; text-align: center;">
@@ -92,7 +169,7 @@
                     </a>
 
                     <p style="font-size: 1.1em; margin-top: 1em;">
-                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 3.0.0 beta 1
+                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 2.2.0
                     </p>
 
                     <p style="margin-top: 1.5em; font-size: 0.95em; color: #444;">
@@ -101,9 +178,9 @@
                         <a href="https://developer.mozilla.org/en-US/docs/Web/HTML" target="_blank">HTML</a> , 
                         <a href="https://developer.mozilla.org/en-US/docs/Web/CSS" target="_blank">CSS</a> , 
                         <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">JavaScript</a> , 
-                        <a href="https://www.rust-lang.org/" target="_blank">Rust</a>,
+                        <a href="https://nodejs.org/" target="_blank">Node.js</a>,
                         and 
-                        <a href="https://tauri.app/" target="_blank">Tauri2.0</a> .
+                        <a href="https://www.electronjs.org/" target="_blank">Electron</a> .
                     </p>
 
                     <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
@@ -161,6 +238,7 @@
         <script src="scripts/hint.js" onload="taskName('hint.js')"></script>
         <script src="scripts/localstorage.js" onload="taskName('localstorage.js')"></script>
         <script src="scripts/cursor.js" onload="taskName('cursor.js')"></script>
+        <script src="scripts/windowControl.js" onload="taskName('windowControl.js')"></script>
         <script src="scripts/toggleUI.js" onload="taskName('toggleUI.js')"></script>
         <script>
             window.addEventListener('load', () => {
