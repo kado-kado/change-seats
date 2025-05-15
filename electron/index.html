@@ -21,7 +21,7 @@
                 <li><a href="#" onclick="showSection('Settings')">Settings</a></li>
                 <li><br></li>
                 <li><a href="#" onclick="toggleUI()">UI</a></li>
-                <li><a href="#" onclick="showSection('README')">README</a></li>
+                <li><a href="#" onclick="showSection('Readme')">README</a></li>
                 <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
                 <li><a href="#" id="closeBtn">閉じる</a></li>
             </ul>
@@ -75,7 +75,7 @@
                 <br>
                 <button id="export" onclick="exportCSV_UTF8_BOM(currentSeats2D)">CSV出力</button>
             </section>
-            <section id="README" class="content-section">
+            <section id="Readme" class="content-section">
                 <h1>change-seats</h1>
                 <p>学校などで使用できる、<strong>視力・性別・席希望</strong>を考慮した席替えシステムです。CSV出力にも対応しています。</p>
                 <p>オフラインで動作します。</p>
@@ -87,33 +87,6 @@
                     <li>視力の弱い生徒を前方席に配置</li>
                     <li>CSVエクスポート（Excelで開ける形式）</li>
                 </ul>
-
-                <h2>ファイル構成</h2>
-                <pre>
-                root/
-                ├── index.html
-                ├── main.js
-                ├── preload.js
-                ├── styles/
-                |         ├── main.css
-                |         ├── cursor.css
-                |         ├── section-main.css
-                |         ├── section-settings.css
-                |         ├── neumorphismUI.css
-                |         └── sidebar.css
-                ├── scripts/
-                |         ├── main.js
-                |         ├── animation.js
-                |         ├── change-section.js
-                |         ├── export.js
-                |         ├── cursor.js
-                |         ├── localstorage.js
-                |         ├── toggleUI.js
-                |         ├── windowControl.js
-                |         └── hint.js
-                └── package.json
-
-                </pre>
 
                 <h2>使用方法</h2>
                 <ol>
@@ -142,17 +115,8 @@
                     <li>フォーマット： 出席番号,名前</li>
                 </ul>
 
-                <h2>使用技術</h2>
-                <ul>
-                    <li>HTML, CSS, JavaScript</li>
-                    <li>ブラウザベース</li>
-                    <li>CSV出力機能（Blob API）</li>
-                    <li>Node.js</li>
-                    <li>Electron ^29.4.6</li>
-                </ul>
-
-                <h2>ライセンス</h2>
-                <p>MIT</p>
+                <h2>その他</h2>
+                <a href="https://github.com/kado-kado/change-seats" target="_blank">詳細はこちらから</a>
             </section>
             <section id="Credits" class="content-section" style="padding: 2em; background: #f9f9f9; border-top: 1px solid #ddd;">
                 <div style="max-width: 800px; margin: 0 auto; text-align: center;">
