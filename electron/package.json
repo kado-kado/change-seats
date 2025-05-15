@@ -11,7 +11,10 @@
             "scripts/**",
             "preload.js",
             "package.json"
-        ]
+        ],
+        "win": {
+            "icon": "icon/icon.png"
+        }
     },
     "scripts": {
         "start": "electron .",
