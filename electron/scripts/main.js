@@ -1,5 +1,5 @@
 window.onload = function () {
-    showSection('README');
+    showSection('Readme');
 
     document.getElementById('applyBtn').addEventListener('click', () => {
         const vertical = parseInt(document.getElementById('vertical').value);
