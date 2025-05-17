@@ -10,7 +10,8 @@
             "styles/**",
             "scripts/**",
             "preload.js",
-            "package.json"
+            "package.json",
+            "icon/**"
         ],
         "win": {
             "icon": "icon/icon.png"
