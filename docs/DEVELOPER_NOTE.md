@@ -1,7 +1,8 @@
 # 席替えアプリ 技術者向けノート
 
-このドキュメントは、Webベースの席替えアプリの内部構造と実装技術についてまとめた技術者向けノートです。HTML/CSS/JavaScript/Node.js によって構成されています。
-Electronを使用し、ビルドされています。
+このドキュメントは、Webベースの席替えアプリの内部構造と実装技術についてまとめた技術者向けノートです。HTML/CSS/JavaScript/Node.js/Rust/Electron/Tauri によって構成されています。
+Electronを使用したビルドされています。
+また、Tauriを使用したビルドされています。
 
 ---
 
@@ -9,33 +10,96 @@ Electronを使用し、ビルドされています。
 
 ```
 root/
-├── index.html
-├── main.js
-├── package.json
-├── styles/
-│   ├── main.css
-│   ├── section-main.css
-|   ├── cursor.css
-│   ├── section-settings.css
-│   ├── neumorphismUI.css
-│   └── sidebar.css
-├── scripts/
-│   ├── main.js
-│   ├── animation.js
-│   ├── change-section.js
-│   ├── export.js
-|   ├── cursor.js
-│   ├── toggleUI.js
-│   ├── windowControl.js
-│   └── hint.js
-├── docs/
-|    ├── README.md (日本語)
-|    ├── README-en.md (English)
-|    ├── THIRD_PARTY.md
-|    └── DEVELOPER_NOTE.md
+├── .gitignore
 ├── LICENSE
+├── README.md
 ├── SECURITY.md
-└── README.md (root)
+├── gh-pages
+    ├── 
+├── docs
+    ├── DEVELOPER_NOTE.md
+    ├── README-en.md
+    ├── README.md
+    └── THIRD_PARTY.md
+├── electron
+    ├── index.html
+    ├── main.js
+    ├── package-lock.json
+    ├── package.json
+    ├── preload.js
+    ├── scripts
+    │   ├── animation.js
+    │   ├── change-section.js
+    │   ├── cursor.js
+    │   ├── export.js
+    │   ├── hint.js
+    │   ├── load.js
+    │   ├── localstorage.js
+    │   ├── main.js
+    │   ├── toggleUI.js
+    │   └── windowControl.js
+    └── styles
+    │   ├── cursor.css
+    │   ├── load.css
+    │   ├── main.css
+    │   ├── neumorphismUI.css
+    │   ├── section-main.css
+    │   ├── section-settings.css
+    │   └── sidebar.css
+├── tauri
+    ├── .vscode
+    │   └── extensions.json
+    ├── README.md
+    ├── package-lock.json
+    ├── package.json
+    ├── src-tauri
+    │   ├── Cargo.lock
+    │   ├── Cargo.toml
+    │   ├── build.rs
+    │   ├── capabilities
+    │   │   └── default.json
+    │   ├── icons
+    │   │   ├── 128x128.png
+    │   │   ├── 128x128@2x.png
+    │   │   ├── 32x32.png
+    │   │   ├── Square107x107Logo.png
+    │   │   ├── Square142x142Logo.png
+    │   │   ├── Square150x150Logo.png
+    │   │   ├── Square284x284Logo.png
+    │   │   ├── Square30x30Logo.png
+    │   │   ├── Square310x310Logo.png
+    │   │   ├── Square44x44Logo.png
+    │   │   ├── Square71x71Logo.png
+    │   │   ├── Square89x89Logo.png
+    │   │   ├── StoreLogo.png
+    │   │   ├── icon.icns
+    │   │   ├── icon.ico
+    │   │   └── icon.png
+    │   ├── src
+    │   │   ├── lib.rs
+    │   │   └── main.rs
+    │   └── tauri.conf.json
+    └── src
+    │   ├── index.html
+    │   ├── scripts
+    │       ├── animation.js
+    │       ├── change-section.js
+    │       ├── cursor.js
+    │       ├── export.js
+    │       ├── hint.js
+    │       ├── load.js
+    │       ├── localstorage.js
+    │       ├── main.js
+    │       └── toggleUI.js
+    │   └── styles
+    │       ├── cursor.css
+    │       ├── load.css
+    │       ├── main.css
+    │       ├── neumorphismUI.css
+    │       ├── section-main.css
+    │       ├── section-settings.css
+    │       └── sidebar.css
+└── testData.json
 ```
 
 ---
@@ -90,7 +154,6 @@ root/
 * `sidebar.css`：サイドメニューの色・レイアウト設定
 * `.seat`：座席セルの非表示・表示切替アニメーション
 * `.show-seat`：表示時に `opacity` / `translateY` アニメーション適用
-* UIを選択することでUIを変更できます。
 
 ---
 
@@ -117,5 +180,4 @@ root/
 * **視力優先処理は必ず前方列のみ対象**
 * **ファイル読み込みは`try-catch`で安全性確保**
 * **アニメーションと表示処理は完全分離（可読性・再利用性向上）**
-* **UTF-8 でエクスポート → 文字化け注意の `alert` 表示あり**
 * **localstorageを使用している**

@@ -26,45 +26,54 @@
         </nav>
         <main id="main">
             <section id="how-to-use" class="content-section">
-                <h1>change-seats</h1>
-                <p>学校などで使用できる、<strong>視力・性別・席希望</strong>を考慮した席替えシステムです。CSV出力にも対応しています。</p>
-                <p>オフラインで動作します。</p>
-
-                <h2>主な機能</h2>
-                <ul>
-                    <li>名前と出席番号を元にランダム席割り</li>
-                    <li>女子専用席の指定</li>
-                    <li>視力の弱い生徒を前方席に配置</li>
-                    <li>CSVエクスポート（Excelで開ける形式）</li>
-                </ul>
-
-                <h2>使用方法</h2>
-                <ol>
-                    <li><strong>change-seats.exe</strong>を開く</li>
-                    <li>生徒の名前・出席番号を入力（JSONやフォーム）</li>
-                    <li>「女子席」や「前の席希望」などのオプションを指定</li>
-                    <li>席割りを生成</li>
-                    <li>必要に応じて「CSV出力」ボタンをクリック</li>
-                    <p>※1 任意のタグがある場所は入力しなくても動きます。</p>
-                    <p>※2 女子席の指定により、班分けをスムーズにしています。</p>
-                </ol>
-
-                <h2>入力仕様（JSON想定）</h2>
+                <h2>使い方</h2>
+                <h3>1.JSON-fileを用意、作成する。</h3>
+                <p>以下の形式です。</p>
                 <pre>
-                [
-                    { "name": "田中", "number": 1, "gender": "male" },
-                    { "name": "鈴木", "number": 2, "gender": "female" }
-                ]
+[
+    { "name": "田中", "number": 1, "gender": "male" },
+    { "name": "鈴木", "number": 2, "gender": "female" }
+]
                 </pre>
-                <p>性別や希望（女子席・前の席希望）はHTMLフォームで指定できます。</p>
-
-                <h2>CSV出力形式</h2>
-                <ul>
-                    <li>出力ファイル名： <strong>seats.csv</strong></li>
-                    <li>文字コード： <strong>UTF-8</strong></li>
-                    <li>フォーマット： 出席番号,名前</li>
-                </ul>
-
+                <a href="https://github.com/kado-kado/change-seats/blob/main/testData.json">例はここから取得できます。</a>
+                <h3>2.インストールする</h3>
+                <a href="https://github.com/kado-kado/change-seats/releases">ここから最新版をインストールしてください。</a>
+                <h3>3.インストーラーを起動する。</h3>
+                <p>任意の場所にインストールしてください。</p>
+                <h3>4.アプリを起動する</h3>
+                <h3>5.Settingsを押す。</h3>
+                <p>座席の列数と行数を指定する。</p>
+                <p>JSON-fileを選択する。</p>
+                <p>右から削除する席数、左から削除する席数は、最終行のみ適応され削除されます。</p>
+                <p>前から2行目以内の席にする場合は、出席番号(JSONで指定した。numberの値)を指定してください。</p>
+                <p>女子の席リストは、男女比が異なる場合に孤立を防ぐためにあります。</p>
+                <p>席番号を指定する必要があります。</p>
+                <p>席番号は以下のようになっています。</p>
+                <table>
+                    <tr>
+                        <td>0</td>
+                        <td>1</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>5</td>
+                        <td>6</td>
+                        <td>7</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>9</td>
+                        <td>10</td>
+                        <td>11</td>
+                    </tr>
+                </table>
+                <h3>6.Applyを押す。</h3>
+                <p>自動で画面が切り替わります。</p>
+                <h3>7.エクスポートをする(任意)</h3>
+                <p>Settingsを押す。</p>
+                <p>下にあるエクスポートを押す</p>
             </section>
             <section id="Credits" class="content-section" style="padding: 2em; background: #f9f9f9; border-top: 1px solid #ddd;">
                 <div style="max-width: 800px; margin: 0 auto; text-align: center;">
@@ -148,11 +157,42 @@
             </section>
             <section id="release-note" class="content-section">
                 <h2>Release note</h2>
-                <h3>ver. 1.1.0</h3>
                 <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
-                    <p>web-appとして、開発</p>
-                    <p>使用言語:
-                        html,js,css</p>
+                <h3>ver 1.1.0</h3>
+                <p>web-appとして、開発</p>
+                <p>使用言語:html,js,css</p>
+                <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+                <h3>ver 1.2.0</h3>
+                <p>animationの追加。</p>
+                <p>一部表記の変更、バグの修正</p>
+                <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+                <h3>ver 1.3.0</h3>
+                <p>設定の保存の追加</p>
+                <p>ファイル構造の変更</p>
+                <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+                <h3>ver 2.0.0</h3>
+                <p>UIの変更</p>
+                <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+                <h3>ver 2.1.0</h3>
+                <p>Load画面の追加</p>
+                <p>バグの修正</p>
+                <p>ビルドの変更</p>
+                <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+                <h3>ver 2.2.0</h3>
+                <p>ビルドに使用するファイルの変更</p>
+                <p>cursorの追加</p>
+                <p>exportをBOM付UTF-8に変更</p>
+                <p>securityの向上</p>
+                <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+                <h3>ver 3.0.0</h3>
+                <h4>Electron版</h4>
+                <p>こちらはフルバージョンです。</p>
+                <p>Developer Toolやその他さまざまな機能が備わっています。</p>
+                <p>フルバージョンでは、UIの変更などが行えます。</p>
+                <h4>Tauri版</h4>
+                <p>こちらは軽量バージョンです。</p>
+                <p>Electron版と比べ、機能は絞られています。</p>
+                <p>フレームワーク的に、Tauriのほうがセキュリティが高いです。</p>
             </section>
             <div id="cursor" class="cursor"></div>
         </main>
