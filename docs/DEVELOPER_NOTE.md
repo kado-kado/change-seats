@@ -9,19 +9,19 @@ Electronを使用したビルドされています。
 ## ファイル構成
 
 ```
-root/
 ├── .gitignore
 ├── LICENSE
 ├── README.md
 ├── SECURITY.md
-├── gh-pages
-    ├── 
 ├── docs
     ├── DEVELOPER_NOTE.md
     ├── README-en.md
     ├── README.md
     └── THIRD_PARTY.md
 ├── electron
+    ├── icon
+    │   ├── icon.png
+    │   └── icon.png.back
     ├── index.html
     ├── main.js
     ├── package-lock.json
@@ -41,6 +41,19 @@ root/
     └── styles
     │   ├── cursor.css
     │   ├── load.css
+    │   ├── main.css
+    │   ├── neumorphismUI.css
+    │   ├── section-main.css
+    │   ├── section-settings.css
+    │   └── sidebar.css
+├── gh-pages
+    ├── icon.png
+    ├── index.html
+    ├── scripts
+    │   ├── change-section.js
+    │   └── cursor.js
+    └── styles
+    │   ├── cursor.css
     │   ├── main.css
     │   ├── neumorphismUI.css
     │   ├── section-main.css
@@ -72,14 +85,16 @@ root/
     │   │   ├── Square71x71Logo.png
     │   │   ├── Square89x89Logo.png
     │   │   ├── StoreLogo.png
-    │   │   ├── icon.icns
+    │   │   ├── icon.icns.back
     │   │   ├── icon.ico
+    │   │   ├── icon.ico.back
     │   │   └── icon.png
     │   ├── src
     │   │   ├── lib.rs
     │   │   └── main.rs
     │   └── tauri.conf.json
     └── src
+    │   ├── icon.png
     │   ├── index.html
     │   ├── scripts
     │       ├── animation.js
