@@ -10,6 +10,7 @@
         <link href="styles/section-main.css" rel="stylesheet" />
         <link href="styles/neumorphismUI.css" rel="stylesheet" id="neumorphism" />
         <link href="styles/cursor.css" rel="stylesheet" />
+        <link rel="icon" href="icon.png" type="image/x-icon" />
     </head>
 
     <body>
@@ -17,6 +18,7 @@
             <h2>Menu</h2>
             <ul class="menu-list">
                 <li><a href="#" onclick="showSection('how-to-use')">How to use</a></li>
+                <li><a href="#" onclick="showSection('release-note')">Release note</a></li>
                 <li><a href="https://github.com/kado-kado/change-seats/releases">Install</a></li>
                 <br>
                 <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
@@ -78,10 +80,6 @@
                         />
                     </a>
 
-                    <p style="font-size: 1.1em; margin-top: 1em;">
-                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 3.1.0
-                    </p>
-
                     <p style="margin-top: 1.5em; font-size: 0.95em; color: #444;">
                         © 2025 <a href="https://github.com/kado-kado" target="_blank">kado-kado</a> . <br><br>
                         Developed with  
@@ -137,7 +135,24 @@
                     <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
 
                     <p style="font-size: 1em;">Special Thanks: <strong>ReI</strong></p>
+
+                    <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+
+                    <p style="font-size: 1em;">Special Thanks: <strong>どっかの誰か</strong></p>
+                    <img 
+                        src="icon.png" 
+                        alt="change-seats image" 
+                        style="width:100%; max-width:600px; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);"
+                        />
                 </div>
+            </section>
+            <section id="release-note" class="content-section">
+                <h2>Release note</h2>
+                <h3>ver. 1.1.0</h3>
+                <hr style="margin: 2em 0; border: none; border-top: 1px solid #ccc;">
+                    <p>web-appとして、開発</p>
+                    <p>使用言語:
+                        html,js,css</p>
             </section>
             <div id="cursor" class="cursor"></div>
         </main>
