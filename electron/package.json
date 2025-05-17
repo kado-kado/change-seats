@@ -1,6 +1,6 @@
 {
     "name": "change-seats",
-    "version": "3.1.0",
+    "version": "3.2.0",
     "description": "change-seats",
     "main": "main.js",
     "build": {
