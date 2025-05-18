@@ -1,5 +1,8 @@
 # Change-Seats
 
+## SITE
+[web site](https://kado-kado.github.io/change-seats)
+
 ## README
 [README.md (Japanese) ](docs/README.md)
 
