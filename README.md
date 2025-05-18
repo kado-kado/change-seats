@@ -5,6 +5,9 @@
 
 [README.md (English) ](docs/README-en.md)
 
+## EXTRA_INFO
+[EXTRA_INFO.md](docs/EXTRA_INFO.md)
+
 ## DEVELOPER_NOTE
 [DEVELOPER_NOTE.md (Japanese)](docs/DEVELOPER_NOTE.md)
 
