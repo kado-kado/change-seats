@@ -12,4 +12,4 @@ Electron版と比べ、機能は絞られています。
 フレームワーク的に、Tauriのほうがセキュリティが高いです。
 
 ### 使い方
-[README.md](README.md)　
+[目次](../README.md)
