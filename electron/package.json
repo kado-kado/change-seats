@@ -22,8 +22,8 @@
         "build": "electron-builder"
     },
     "devDependencies": {
-        "electron": "^29.4.6",
-        "electron-builder": "^24.13.3"
+        "electron": "^38.3.0",
+        "electron-builder": "^26.0.12"
     },
     "author": "kado-kado",
     "license": "MIT",

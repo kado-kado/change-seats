@@ -19,9 +19,10 @@
             <ul class="menu-list">
                 <li><a href="#" onclick="showSection('Main')">Main</a></li>
                 <li><a href="#" onclick="showSection('Settings')">Settings</a></li>
-                <li><br></li>
-                <li><a href="#" onclick="toggleUI()">UI</a></li>
                 <li><a href="#" onclick="showSection('Readme')">README</a></li>
+                <li><br></li>
+                <li><a href="#" onclick="toggleTheme()">UI</a></li>
+                <li><a href="#" onclick="showSection('Release')">Release</a></li>
                 <li><a href="#" onclick="showSection('Credits')">Credits</a></li>
                 <li><a href="#" id="closeBtn">閉じる</a></li>
             </ul>
@@ -118,6 +119,29 @@
                 <h2>その他</h2>
                 <a href="https://github.com/kado-kado/change-seats" target="_blank">詳細はこちらから</a>
             </section>
+            <section id="Release" class="content-section">
+                <h2>Release Note</h2>
+                <h3>Ver. 4.0.0</h3>
+                <p>4件の脆弱性の修正、軽微な内部ロジックの修正が含まれます。</p>
+                <div id="vuln-cvss-list">
+                    <h3>CVE-2025-5889</h3>
+                    <h4>CVSS 3.1 / Low</h4>
+                    <p>正規表現の複雑性によるリソース消費（ReDoS）攻撃の可能性。リモート攻撃は困難。</p>
+
+                    <h3>CVE-2025-7783</h3>
+                    <h4>CVSS 9.4 / Critical</h4>
+                    <p>HTTPパラメータ汚染（HPP）により、リモートで任意のコード実行が可能。最優先で更新が必要。</p>
+
+                    <h3>CVE-2025-54798</h3>
+                    <h4>CVSS 2.5 / Low</h4>
+                    <p>シンボリックリンクの不適切な解決により、一時ファイルの競合や情報漏えいの可能性がある。</p>
+
+                    <h3>CVE-2025-55305</h3>
+                    <h4>CVSS 6.1 / Medium</h4>
+                    <p>Electronアプリケーションでのリソース改ざんにより、アプリの整合性が損なわれる可能性。</p>
+                </div>
+
+            </section>
             <section id="Credits" class="content-section" style="padding: 2em; background: #f9f9f9; border-top: 1px solid #ddd;">
                 <div style="max-width: 800px; margin: 0 auto; text-align: center;">
                     <h2 style="font-size: 1.8em; margin-bottom: 1em;">Credits</h2>
@@ -133,7 +157,7 @@
                     </a>
 
                     <p style="font-size: 1.1em; margin-top: 1em;">
-                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 3.2.0
+                        <strong><a href="https://github.com/kado-kado/change-seats" target="_blank">change-seats</a></strong> ver. 4.0.0
                     </p>
 
                     <p style="margin-top: 1.5em; font-size: 0.95em; color: #444;">
