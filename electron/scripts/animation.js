@@ -1,6 +1,6 @@
 function animateSeats() {
     const seats = document.querySelectorAll('#seatDisplay td.seat');
-    const delayUnit = 1; // default 1000
+    const delayUnit = 1000; // default 1000
 
     const shuffledSeats = Array.from(seats);
     for (let i = shuffledSeats.length - 1; i > 0; i--) {
