@@ -159,6 +159,7 @@ function displaySeats(seats) {
     container.innerHTML = output;
 }
 
+<<<<<<< HEAD
 function conditionalSwap(seats2D) {
     const horizontal = seats2D[0].length;
 
@@ -237,6 +238,8 @@ function conditionalSwap(seats2D) {
     }
 }
 
+=======
+>>>>>>> c7e8c26dbf587f9a6f9f604b7b7a509a6cae5c28
 
 function shuffleArray(array) {
     const result = array.slice();

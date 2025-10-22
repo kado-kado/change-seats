@@ -1,3 +1,17 @@
+:root {
+    --cursor-bg: rgba(0, 0, 0, 0.7);
+    --cursor-hover-bg: rgba(113, 205, 118, 0.5);
+    --btn-bg: #000;
+    --btn-text: #fff;
+}
+
+[data-theme="dark"] {
+    --cursor-bg: rgba(255, 255, 255, 0.7);
+    --cursor-hover-bg: rgba(113, 205, 118, 0.4);
+    --btn-bg: #eaeaea;
+    --btn-text: #1e1e1e;
+}
+
 html,
 body,
 a,
@@ -12,9 +26,9 @@ form {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(0, 0, 0, 0.7);
+    background: var(--cursor-bg);
     z-index: 1000;
-    transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s;
+    transition: width 0.5s, height 0.5s, top 0.5s, left 0.5s, background 0.3s;
     transform: translate(0, 0);
     pointer-events: none;
 }
@@ -24,7 +38,7 @@ form {
     left: -20px;
     width: 40px;
     height: 40px;
-    background: rgba(113, 205, 118, 0.5);
+    background: var(--cursor-hover-bg);
 }
 
 .btn {
@@ -32,10 +46,22 @@ form {
     min-width: 300px;
     margin: 20px;
     padding: 20px;
-    color: #fff;
-    background-color: #000;
+    color: var(--btn-text);
+    background-color: var(--btn-bg);
     font-size: 20px;
     font-weight: bold;
     text-decoration: none;
     text-align: center;
+    border-radius: 8px;
+    transition: background-color 0.3s, color 0.3s, transform 0.1s;
+    cursor: none;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: scale(1.03);
+}
+
+.btn:active {
+    transform: scale(0.97);
 }
