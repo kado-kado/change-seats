@@ -107,7 +107,6 @@ window.onload = function () {
                     }
                 }
 
-                Helper(seats2D);
                 displaySeats(seats2D);
                 showSection('Main');
                 setTimeout(() => animateSeats(), 100);
@@ -159,45 +158,11 @@ function displaySeats(seats) {
     container.innerHTML = output;
 }
 
-function shuffleArray(array) {
-    const result = array.slice();
-    for (let i = result.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [result[i], result[j]] = [result[j], result[i]];
+document.getElementById("shareBtn").addEventListener("click", () => {
+    if (!currentSeats2D) {
+        alert("席が生成されていません");
+        return;
     }
-    return result;
-}
 
-function displaySeats(seats) {
-    currentSeats2D = seats;
-    let output = '<table border="1" style="border-collapse: collapse;">';
-    for (let row of seats) {
-        output += "<tr>";
-        for (let seat of row) {
-            if (!seat || seat.name === "空席") {
-                output += `<td class="seat empty"></td>`;
-            } else {
-                let bgColor = "#ffffff";
-                if (seat.gender === "male") {
-                    bgColor = "#d0e6ff";
-                } else if (seat.gender === "female") {
-                    bgColor = "#ffe0f0";
-                }
-                output += `<td class="seat" style="background: ${bgColor};">
-                    ${seat.name} (${seat.number})
-                </td>`;
-            }
-        }
-        output += "</tr>";
-    }
-    output += "</table>";
-
-    let container = document.getElementById("seatDisplay");
-    if (!container) {
-        container = document.createElement("div");
-        container.id = "seatDisplay";
-        document.getElementById("sheets").appendChild(container);
-    }
-    container.innerHTML = output;
-
-}
+    generateQR(currentSeats2D);
+});
