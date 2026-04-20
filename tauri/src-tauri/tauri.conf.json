@@ -13,7 +13,7 @@
         "title": "change-seats",
         "width": 800,
         "height": 600,
-        "maximumsize": true
+        "maximized": true
       }
     ],
     "security": {
