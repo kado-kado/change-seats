@@ -2,11 +2,11 @@ function alertHint(param){
     let hint
     switch (param) {
         case "vertical":
-            hint = "これは、席の縦の数を入力するフォームです。";
+            hint = "これは、席の縦の数を入力するフォームです。\n前後左右の前後に当たります。";
             break;
 
         case "horizontal":
-            hint = "これは、席の横の数を入力するフォームです。";
+            hint = "これは、席の横の数を入力するフォームです。\n前後左右の左右に当たります。";
             break;
 
         case "deleteRight":

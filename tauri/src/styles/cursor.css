@@ -12,11 +12,9 @@
     --btn-text: #1e1e1e;
 }
 
-html,
-body,
-a,
-form {
-    cursor: none;
+*, *::before, *::after,
+html, body, a, form, input, textarea, select, button {
+    cursor: none !important;
 }
 
 .cursor {
@@ -57,11 +55,10 @@ form {
     cursor: none;
 }
 
-.btn:hover {
-    opacity: 0.9;
-    transform: scale(1.03);
-}
+.btn:hover { opacity: 0.9; transform: scale(1.03); }
+.btn:active { transform: scale(0.97); }
 
-.btn:active {
-    transform: scale(0.97);
+::selection {
+    background: var(--cursor-hover-bg);
+    color: inherit;
 }

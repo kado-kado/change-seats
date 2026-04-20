@@ -1,6 +1,6 @@
 function animateSeats() {
     const seats = document.querySelectorAll('#seatDisplay td.seat');
-    const delayUnit = 1000; // ミリ秒単位の最小ディレイ
+    const delayUnit = 1000; // default 1000
 
     const shuffledSeats = Array.from(seats);
     for (let i = shuffledSeats.length - 1; i > 0; i--) {
@@ -11,6 +11,6 @@ function animateSeats() {
     shuffledSeats.forEach((seat, index) => {
         setTimeout(() => {
             seat.classList.add('show-seat');
-        }, index * delayUnit + Math.random() * 200); // ランダム要素あり
+        }, index * delayUnit + Math.random() * 200);
     });
 }

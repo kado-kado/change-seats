@@ -37,6 +37,8 @@ function deserializeSeats(str) {
 }
 
 window.onload = function () {
+
+    alert('表示専用です。\nすべてのデバイスで正しく表示される保証はできません。')
     const hash = location.hash.slice(1);
 
     if (!hash) {
@@ -93,4 +95,5 @@ function displaySeats(seats) {
     output += "</table>";
 
     container.innerHTML = output;
+
 }
