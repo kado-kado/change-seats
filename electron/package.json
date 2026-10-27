@@ -22,14 +22,15 @@
         "build": "electron-builder"
     },
     "devDependencies": {
-        "electron": "^41.2.1",
-        "electron-builder": "^26.8.1"
+        "electron": "45.1.0",
+        "electron-builder": "26.18.0"
     },
     "author": "kado-kado",
     "license": "MIT",
     "dependencies": {
-        "exceljs": "^4.4.0",
-        "npm": "^11.12.1",
-        "qrcode": "^1.5.4"
+        "exceljs": "4.4.0",
+        "npm": "12.2.1",
+        "nvm": "^0.0.4",
+        "qrcode": "1.5.4"
     }
 }
