@@ -2,12 +2,11 @@ function exportCSV_UTF8_BOM(seats2D) {
     let csvContent = "";
 
     for (let i = 0; i < seats2D.length; i++) {
-        const row = seats2D[i].map(seat => {
+        const row = seats2D[i].flatMap(seat => {
             if (seat && seat.name !== "空席") {
-                return `${seat.number},${seat.name}`;
-            } else {
-                return ",";
+                return [`${seat.number}`, `"${String(seat.name).replaceAll('"', '""')}"`];
             }
+            return ["空席", ""];
         }).join(",");
 
         csvContent += row + "\n";

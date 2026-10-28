@@ -1,6 +1,6 @@
 function decodeBase64Url(str) {
-    str = str.replace(/-/g, '+').replace(/_/g, '/');
-    return atob(str);
+    const base64 = decodeURIComponent(str).replace(/-/g, '+').replace(/_/g, '/');
+    return atob(base64.padEnd(Math.ceil(base64.length / 4) * 4, '='));
 }
 
 function deserializeSeats(str) {
@@ -8,6 +8,9 @@ function deserializeSeats(str) {
     const payload = JSON.parse(json);
 
     const { r, c, d } = payload;
+    if (!Number.isInteger(r) || !Number.isInteger(c) || r < 1 || c < 1 || !Array.isArray(d) || d.length !== r * c) {
+        throw new Error('席データの形式が正しくありません');
+    }
 
     const seats2D = [];
     let index = 0;
@@ -17,7 +20,7 @@ function deserializeSeats(str) {
         for (let j = 0; j < c; j++) {
             const token = d[index++];
 
-            if (token === "__") {
+            if (token === "__" || token === "null" || token === "") {
                 row.push(null);
             } else {
                 const number = parseInt(token.slice(0, -1));
@@ -38,7 +41,6 @@ function deserializeSeats(str) {
 
 window.onload = function () {
 
-    alert('表示専用です。\nすべてのデバイスで正しく表示される保証はできません。')
     const hash = location.hash.slice(1);
 
     if (!hash) {
@@ -59,11 +61,15 @@ function displaySeats(seats) {
     const rows = seats.length;
     const cols = seats[0].length;
 
+    // 最終行だけ、席削除分として左端に空席を追加して他の席を右へずらす。
+    if (cols > 1) {
+        seats[rows - 1].pop();
+        seats[rows - 1].unshift(null);
+    }
+
     const container = document.getElementById("seatDisplay");
 
-    const rect = container.getBoundingClientRect();
-    const height = window.innerHeight;
-    const cellSize = Math.floor(height / rows);
+    const cellSize = Math.max(64, Math.floor((window.innerHeight - 120) / rows));
 
     let output = `<table style="border-collapse: collapse; margin: auto;">`;
 
@@ -71,16 +77,13 @@ function displaySeats(seats) {
         output += "<tr>";
         for (let seat of row) {
             if (!seat) {
-                output += `<td style="width:${cellSize}px;height:${cellSize}px;"></td>`;
+                output += `<td class="empty-seat" style="width:${cellSize}px;height:${cellSize}px;"></td>`;
             } else {
-                let bgColor = "#fff";
-                if (seat.gender === "male") bgColor = "#d0e6ff";
-                else if (seat.gender === "female") bgColor = "#ffe0f0";
+                const genderClass = seat.gender === "female" ? "female-seat" : "male-seat";
 
-                output += `<td style="
+                output += `<td class="${genderClass}" style="
                     width:${cellSize}px;
                     height:${cellSize}px;
-                    background:${bgColor};
                     text-align:center;
                     vertical-align:middle;
                     font-size:${cellSize * 0.4}px;

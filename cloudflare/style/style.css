@@ -167,3 +167,41 @@ a:active {
         padding: 1rem;
     }
 }
+
+/* Minimal light theme for the shared seat viewer */
+:root { color-scheme: light; }
+body {
+    font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif !important;
+    background: #fff !important;
+    color: #1f2933 !important;
+    min-height: 100vh;
+    height: auto !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    padding: 24px !important;
+}
+#seatDisplay {
+    max-width: 1100px;
+    margin: 0 auto !important;
+    background: #fff;
+}
+#seatDisplay {
+    overflow-x: auto;
+}
+#seatDisplay td {
+    background: #fff !important;
+}
+#seatDisplay td.empty-seat {
+    border-style: dashed !important;
+    border-color: #cfd3d9 !important;
+    background: #f8f9fa !important;
+}
+#seatDisplay td.male-seat {
+    border-color: #9fb5c8 !important;
+    background: #e8f1f7 !important;
+}
+#seatDisplay td.female-seat {
+    border-color: #cdb2b2 !important;
+    background: #f4eaea !important;
+}
